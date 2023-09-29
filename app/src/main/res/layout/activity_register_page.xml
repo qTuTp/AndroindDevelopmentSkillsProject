@@ -34,6 +34,7 @@
                 android:fontFamily="@font/inter_extrabold"
                 android:gravity="top"
                 android:text="@string/inti"
+                style="@style/inti"
                 android:textAppearance="@style/inti"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -96,7 +97,7 @@
         android:text="@string/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:id="@+id/titleName"
@@ -107,7 +108,7 @@
         android:layout_width="0dp"
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:background="@drawable/input_background"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintTop_toBottomOf="@id/titleName"
@@ -123,8 +124,8 @@
         android:text="@string/matriculationNo"
         app:layout_constraintStart_toEndOf="@id/inputName"
         app:layout_constraintTop_toBottomOf="@id/header"
-        android:textAppearance="@style/regularWord"
         android:layout_marginStart="30dp"
+        style="@style/regularWord"
         android:layout_marginTop="20dp"
         android:id="@+id/titleId"
 
@@ -134,7 +135,7 @@
         android:layout_width="0dp"
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:background="@drawable/input_background"
         app:layout_constraintWidth_percent="0.45"
         app:layout_constraintTop_toBottomOf="@id/titleId"
@@ -150,7 +151,7 @@
         android:text="@string/email"
         app:layout_constraintTop_toBottomOf="@id/inputName"
         app:layout_constraintStart_toStartOf="parent"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:id="@+id/titleEmail"
@@ -161,7 +162,7 @@
         android:layout_width="0dp"
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:background="@drawable/input_background"
         app:layout_constraintTop_toBottomOf="@id/titleEmail"
         app:layout_constraintStart_toStartOf="@id/titleEmail"
@@ -178,7 +179,7 @@
         android:text="@string/phoneNo"
         app:layout_constraintTop_toBottomOf="@id/inputEmail"
         app:layout_constraintStart_toStartOf="parent"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:id="@+id/titlePhone"
@@ -189,7 +190,7 @@
         android:layout_width="0dp"
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:background="@drawable/input_background"
         app:layout_constraintTop_toBottomOf="@id/titlePhone"
         app:layout_constraintStart_toStartOf="@id/titlePhone"
@@ -205,10 +206,10 @@
         android:text="@string/password"
         app:layout_constraintTop_toBottomOf="@id/inputPhone"
         app:layout_constraintStart_toStartOf="parent"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/titlePassword"
+        android:id="@+id/passwordTitle"
 
         />
 
@@ -216,15 +217,14 @@
         android:layout_width="0dp"
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:background="@drawable/input_background"
-        app:layout_constraintTop_toBottomOf="@id/titlePassword"
-        app:layout_constraintStart_toStartOf="@id/titlePassword"
+        app:layout_constraintTop_toBottomOf="@id/passwordTitle"
+        app:layout_constraintStart_toStartOf="@id/titlePhone"
         app:layout_constraintEnd_toEndOf="@id/inputId"
         android:paddingHorizontal="10sp"
         android:paddingVertical="5sp"
         android:id="@+id/inputPassword"
-
         />
 
     <TextView
@@ -233,7 +233,7 @@
         android:text="@string/confirmPassword"
         app:layout_constraintTop_toBottomOf="@id/inputPassword"
         app:layout_constraintStart_toStartOf="parent"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:id="@+id/titleConfirmPassword"
@@ -244,16 +244,49 @@
         android:layout_width="0dp"
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/regularWord"
+        style="@style/regularWord"
         android:background="@drawable/input_background"
         app:layout_constraintTop_toBottomOf="@id/titleConfirmPassword"
-        app:layout_constraintStart_toStartOf="@id/titleConfirmPassword"
+        app:layout_constraintStart_toStartOf="@id/titlePhone"
         app:layout_constraintEnd_toEndOf="@id/inputId"
         android:paddingHorizontal="10sp"
         android:paddingVertical="5sp"
         android:id="@+id/inputConfirmPassword"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerButton"
+        android:background="@drawable/primary_button_background"
+        app:layout_constraintTop_toBottomOf="@id/inputConfirmPassword"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/inputConfirmPassword"
+        style="@style/buttonTextWhite"
+        android:text="@string/registerButton"
+        android:textAllCaps="false"
+        android:padding="-10dp"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@id/cancelButton"
 
         />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginStart="50dp"
+        android:id="@+id/cancelButton"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@id/registerButton"
+        app:layout_constraintTop_toTopOf="@id/registerButton"
+        app:layout_constraintEnd_toEndOf="@id/inputConfirmPassword"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:background="@drawable/secondary_button_background"
+        style="@style/buttonTextRed"
+         />
+
 
 
 
