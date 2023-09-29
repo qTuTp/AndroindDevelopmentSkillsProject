@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">IICParking</string>
+    <string name="inti">INTI</string>
+    <string name="internation">International\nUniversity College</string>
+    <string name="registerTitle">Registration</string>
+    <string name="idInputPrompt">Enter Student ID</string>
+    <string name="passwordInputPrompt">Enter Password</string>
+    <string name="emailInputPrompt">Enter Email</string>
+    <string name="nameInputPrompt">Enter Name</string>
+    <string name="phoneInputPrompt">Enter Phone Number</string>
+    <string name="confirmPasswordPrompt">Enter Confirm Password</string>
+    <string name="name">Name</string>
+    <string name="matriculationNo">Matriculation No</string>
+    <string name="email">Email</string>
+    <string name="phoneNo">PhoneNo</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="registerButton">Register</string>
+    <string name="cancel">Cancel</string>
+
+
+
 </resources>

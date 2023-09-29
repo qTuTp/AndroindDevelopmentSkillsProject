@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterPage"
+    android:background="@color/white">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/INTIRed"
+        app:cardCornerRadius="0dp"
+        android:elevation="10dp"
+        android:id="@+id/registerHeaderCard"
+        app:strokeWidth="0dp"
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="24sp"
+            >
+            <TextView
+                android:id="@+id/INTILogo1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_extrabold"
+                android:gravity="top"
+                android:text="@string/inti"
+                style="@style/inti"
+                android:textAppearance="@style/inti"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/INTILogo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/internation"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:gravity="top"
+                app:layout_constraintTop_toTopOf="@id/INTILogo1"
+                app:layout_constraintBottom_toBottomOf="@id/INTILogo1"
+                app:layout_constraintStart_toEndOf="@id/INTILogo1"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_marginStart="8dp"
+
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintTop_toBottomOf="@id/registerHeaderCard"
+        android:id="@+id/header"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/registerTitle"
+            android:textColor="@color/INTIRed"
+            android:textSize="30sp"
+
+
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/inti_star_logo"
+            android:layout_marginStart="10dp"
+            />
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        style="@style/regularWord"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/titleName"
+
+        />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        style="@style/regularWord"
+        android:background="@drawable/input_background"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintTop_toBottomOf="@id/titleName"
+        app:layout_constraintStart_toStartOf="@id/titleName"
+        android:paddingHorizontal="10sp"
+        android:paddingVertical="5sp"
+        android:id="@+id/inputName"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/matriculationNo"
+        app:layout_constraintStart_toEndOf="@id/inputName"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_marginStart="30dp"
+        style="@style/regularWord"
+        android:layout_marginTop="20dp"
+        android:id="@+id/titleId"
+
+        />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        style="@style/regularWord"
+        android:background="@drawable/input_background"
+        app:layout_constraintWidth_percent="0.45"
+        app:layout_constraintTop_toBottomOf="@id/titleId"
+        app:layout_constraintStart_toStartOf="@id/titleId"
+        android:paddingHorizontal="10sp"
+        android:paddingVertical="5sp"
+        android:id="@+id/inputId"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        app:layout_constraintTop_toBottomOf="@id/inputName"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/regularWord"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/titleEmail"
+
+        />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        style="@style/regularWord"
+        android:background="@drawable/input_background"
+        app:layout_constraintTop_toBottomOf="@id/titleEmail"
+        app:layout_constraintStart_toStartOf="@id/titleEmail"
+        app:layout_constraintEnd_toEndOf="@id/inputId"
+        android:paddingHorizontal="10sp"
+        android:paddingVertical="5sp"
+        android:id="@+id/inputEmail"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phoneNo"
+        app:layout_constraintTop_toBottomOf="@id/inputEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/regularWord"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/titlePhone"
+
+        />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        style="@style/regularWord"
+        android:background="@drawable/input_background"
+        app:layout_constraintTop_toBottomOf="@id/titlePhone"
+        app:layout_constraintStart_toStartOf="@id/titlePhone"
+        app:layout_constraintEnd_toEndOf="@id/inputId"
+        android:paddingHorizontal="10sp"
+        android:paddingVertical="5sp"
+        android:id="@+id/inputPhone"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password"
+        app:layout_constraintTop_toBottomOf="@id/inputPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/regularWord"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/passwordTitle"
+
+        />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        style="@style/regularWord"
+        android:background="@drawable/input_background"
+        app:layout_constraintTop_toBottomOf="@id/passwordTitle"
+        app:layout_constraintStart_toStartOf="@id/titlePhone"
+        app:layout_constraintEnd_toEndOf="@id/inputId"
+        android:paddingHorizontal="10sp"
+        android:paddingVertical="5sp"
+        android:id="@+id/inputPassword"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirmPassword"
+        app:layout_constraintTop_toBottomOf="@id/inputPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/regularWord"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/titleConfirmPassword"
+
+        />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        style="@style/regularWord"
+        android:background="@drawable/input_background"
+        app:layout_constraintTop_toBottomOf="@id/titleConfirmPassword"
+        app:layout_constraintStart_toStartOf="@id/titlePhone"
+        app:layout_constraintEnd_toEndOf="@id/inputId"
+        android:paddingHorizontal="10sp"
+        android:paddingVertical="5sp"
+        android:id="@+id/inputConfirmPassword"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerButton"
+        android:background="@drawable/primary_button_background"
+        app:layout_constraintTop_toBottomOf="@id/inputConfirmPassword"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/inputConfirmPassword"
+        style="@style/buttonTextWhite"
+        android:text="@string/registerButton"
+        android:textAllCaps="false"
+        android:padding="-10dp"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@id/cancelButton"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginStart="50dp"
+        android:id="@+id/cancelButton"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@id/registerButton"
+        app:layout_constraintTop_toTopOf="@id/registerButton"
+        app:layout_constraintEnd_toEndOf="@id/inputConfirmPassword"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:background="@drawable/secondary_button_background"
+        style="@style/buttonTextRed"
+         />
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
