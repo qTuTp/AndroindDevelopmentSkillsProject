@@ -2,7 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="INTIRed">#e20c18</color>
+<!--    <color name="INTIRed">#e20c18</color>-->
+    <color name="INTIRed">#CD242D</color>
     <color name="INTIGrey">#636363</color>
     <color name="INTILightGrey">#bebcb9</color>
 
