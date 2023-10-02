@@ -12,9 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IICParking"
         tools:targetApi="31">
-        <activity
-            android:name=".Testing"
-            android:exported="false" />
+
         <activity
             android:name=".RegisterPage"
             android:exported="true">
