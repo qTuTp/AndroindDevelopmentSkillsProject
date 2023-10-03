@@ -17,7 +17,7 @@
     <string name="confirmPassword">Confirm Password</string>
     <string name="registerButton">Register</string>
     <string name="cancel">Cancel</string>
-
+    <string name="Welcome">WELCOME</string>
 
 
 </resources>
