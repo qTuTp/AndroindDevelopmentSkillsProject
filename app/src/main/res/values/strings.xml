@@ -18,6 +18,10 @@
     <string name="registerButton">Register</string>
     <string name="cancel">Cancel</string>
     <string name="Welcome">WELCOME</string>
+    <string name="forgetPassword">Forget Password ?</string>
+    <string name="login">Login</string>
+    <string name="noAccount">Do not have a Account ?</string>
+    <string name="signup">Sign Up !</string>
 
 
 </resources>
