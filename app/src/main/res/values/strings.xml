@@ -29,6 +29,10 @@
     <string name="profilePhone">012-xxxxxxx</string>
     <string name="profilePassword">01234567890</string>
     <string name="editProfileButton">Edit Profile</string>
+    <string name="reportTitle">Report Issue</string>
+    <string name="issueTitle">Issue Title:</string>
+    <string name="issueDescription">Issue Description:</string>
+    <string name="submitButton">Submit</string>
 
 
 </resources>
