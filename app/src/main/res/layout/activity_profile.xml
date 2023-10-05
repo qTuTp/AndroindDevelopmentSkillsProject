@@ -58,7 +58,7 @@
         android:id="@+id/profile_name">
 
         <ImageView
-            android:id="@+id/account_circle"
+            android:id="@+id/user"
             android:layout_width="43dp"
             android:layout_height="43dp"
             android:src="@drawable/profile_circle"
@@ -70,9 +70,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profileName"
-            android:textSize="30dp"
-            app:layout_constraintStart_toEndOf="@id/account_circle"
-            android:layout_marginStart="95dp"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/user"
+            android:layout_marginStart="dp"
             />
     </LinearLayout>
 
@@ -92,7 +92,7 @@
         android:id="@+id/profile_matrix">
 
         <ImageView
-            android:id="@+id/idCard"
+            android:id="@+id/matrixCard"
             android:layout_width="43dp"
             android:layout_height="43dp"
             android:src="@drawable/profile_matrix"
@@ -104,9 +104,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/profileMatrix"
-            android:textSize="30dp"
-            app:layout_constraintStart_toEndOf="@id/idCard"
-            android:layout_marginStart="50dp"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/matrixCard"
+            android:layout_marginStart="dp"
             />
     </LinearLayout>
 
@@ -117,7 +117,120 @@
         app:layout_constraintTop_toBottomOf="@id/profile_matrix"
         android:layout_marginTop="10dp"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/profile_matrix"
+        android:id="@+id/profile_email">
 
+        <ImageView
+            android:id="@+id/email"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:src="@drawable/profile_email"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_matrix" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profileEmail"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/email"
+            android:layout_marginStart="dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/INTIRed"
+        app:layout_constraintTop_toBottomOf="@id/profile_email"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/profile_email"
+        android:id="@+id/profile_phone">
+
+        <ImageView
+            android:id="@+id/phone"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:src="@drawable/profile_phone"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_email" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profilePhone"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/phone"
+            android:layout_marginStart="dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/INTIRed"
+        app:layout_constraintTop_toBottomOf="@id/profile_phone"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/profile_phone"
+        android:id="@+id/profile_password">
+
+        <ImageView
+            android:id="@+id/password"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:src="@drawable/profile_password"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_phone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profilePassword"
+            android:textSize="20dp"
+            app:layout_constraintStart_toEndOf="@id/password"
+            android:layout_marginStart="dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/INTIRed"
+        app:layout_constraintTop_toBottomOf="@id/profile_password"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editButton"
+        app:layout_constraintTop_toBottomOf="@id/profile_password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/primary_button_background"
+        android:layout_marginTop="70dp"
+        android:text="@string/editProfileButton"
+        style="@style/buttonTextWhite"
+        android:textAllCaps="false"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

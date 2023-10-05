@@ -23,8 +23,12 @@
     <string name="noAccount">Do not have a Account ?</string>
     <string name="signup">Sign Up !</string>
     <string name="profileTitle">Profile</string>
-    <string name="profileName">Name</string>
-    <string name="profileMatrix">Matrix Number</string>
+    <string name="profileName">Bong Kai Min</string>
+    <string name="profileMatrix">P21013393</string>
+    <string name="profileEmail">p21013393@student.newinti.edu.my</string>
+    <string name="profilePhone">012-xxxxxxx</string>
+    <string name="profilePassword">01234567890</string>
+    <string name="editProfileButton">Edit Profile</string>
 
 
 </resources>
