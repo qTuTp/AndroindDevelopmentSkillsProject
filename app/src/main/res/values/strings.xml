@@ -22,6 +22,9 @@
     <string name="login">Login</string>
     <string name="noAccount">Do not have a Account ?</string>
     <string name="signup">Sign Up !</string>
+    <string name="profileTitle">Profile</string>
+    <string name="profileName">Name</string>
+    <string name="profileMatrix">Matrix Number</string>
 
 
 </resources>

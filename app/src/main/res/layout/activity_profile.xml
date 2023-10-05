@@ -9,19 +9,115 @@
 
     <include
         layout="@layout/app_header"
-        android:id="@+id/header"
+        android:id="@+id/profile_header"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="43dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/arrow_background"
-        android:drawableLeft="@drawable/backbutton_arrow"
-        android:padding="8dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/profile_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        app:layout_constraintTop_toBottomOf="@id/profile_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="50dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_header"
+        android:id="@+id/header"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/profileTitle"
+            android:textColor="@color/INTIRed"
+            android:textSize="30sp"
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/inti_star_logo"
+            android:layout_marginStart="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="40dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:id="@+id/profile_name">
+
+        <ImageView
+            android:id="@+id/account_circle"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:src="@drawable/profile_circle"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profileName"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@id/account_circle"
+            android:layout_marginStart="95dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/INTIRed"
+        app:layout_constraintTop_toBottomOf="@id/profile_name"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/profile_name"
+        android:id="@+id/profile_matrix">
+
+        <ImageView
+            android:id="@+id/idCard"
+            android:layout_width="43dp"
+            android:layout_height="43dp"
+            android:src="@drawable/profile_matrix"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profileMatrix"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@id/idCard"
+            android:layout_marginStart="50dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/INTIRed"
+        app:layout_constraintTop_toBottomOf="@id/profile_matrix"
+        android:layout_marginTop="10dp"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
