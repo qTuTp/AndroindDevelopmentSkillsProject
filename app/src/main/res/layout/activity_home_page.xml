@@ -74,11 +74,40 @@
                 app:layout_constraintTop_toBottomOf="@id/INTILogo1"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/plate_background"
-
-
-
+                style="@style/carPlateText"
+                android:text="ABC 1234"
+                android:gravity="center"
+                android:id="@+id/carPlateNumber"
 
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/carPlateNumber"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:paddingHorizontal="30dp"
+                android:layout_marginTop="30dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/secondary_button_background_round"
+                    android:drawableStart="@drawable/park_icon"
+                    android:text="@string/parkManage"
+                    android:fontFamily="@font/chakra_petch_bold"
+                    android:textSize="20sp"
+
+                    />
+
+
+            </LinearLayout>
+
+
+
 
 
 
