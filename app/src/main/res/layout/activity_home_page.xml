@@ -273,6 +273,118 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/parkVacancyCard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/scaled_car_selected_icon"
+                android:background="@color/white"
+                android:text="@string/parkSelect"
+                style="@style/vacancyLabel"
+                android:id="@+id/parkSelectButton"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:paddingVertical="3dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/scaled_car_search_icon"
+                android:background="@color/white"
+                android:text="@string/searchCar"
+                style="@style/vacancyLabel"
+                android:id="@+id/seachCarButton"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:paddingVertical="3dp"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/scaled_report_icon"
+                android:background="@color/white"
+                android:text="@string/report"
+                style="@style/vacancyLabel"
+                android:id="@+id/reportButton"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:paddingVertical="3dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/scaled_profile_icon"
+                android:background="@color/white"
+                android:text="@string/searchCar"
+                style="@style/vacancyLabel"
+                android:id="@+id/profileButton"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:paddingVertical="3dp"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/scaled_peak_time_icon"
+                android:background="@color/white"
+                android:text="@string/peak"
+                style="@style/vacancyLabel"
+                android:id="@+id/peakTimeButton"
+                android:layout_weight="1"
+                android:paddingVertical="3dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/scaled_notification_icon"
+                android:background="@color/white"
+                android:text="@string/notif"
+                style="@style/vacancyLabel"
+                android:id="@+id/notificationButton"
+                android:layout_weight="1"
+                android:paddingVertical="3dp"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

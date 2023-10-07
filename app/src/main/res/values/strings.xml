@@ -29,6 +29,12 @@
     <string name="basement2">BASEMENT -2</string>
     <string name="garden">GARDEN</string>
     <string name="parkVacancy">Park Vacancy</string>
+    <string name="parkSelect">Parking Selection</string>
+    <string name="searchCar">Search Vehicle</string>
+    <string name="report">Report</string>
+    <string name="profile">Profile</string>
+    <string name="peak">Peak Time</string>
+    <string name="notif">Notification</string>
 
 
 </resources>

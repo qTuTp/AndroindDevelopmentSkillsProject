@@ -3,6 +3,6 @@
     <item
         android:width="71dp"
         android:height="77dp"
-        android:drawable="@drawable/notification_icon"
+        android:drawable="@drawable/peak_time_icon"
         android:gravity="center" />
 </layer-list>
