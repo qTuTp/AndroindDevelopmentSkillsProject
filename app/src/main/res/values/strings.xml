@@ -24,6 +24,11 @@
     <string name="signup">Sign Up !</string>
     <string name="parkManage">Parking Management</string>
     <string name="manageCar">Manage Vehicle</string>
+    <string name="f1">FLOOR 1</string>
+    <string name="basement1">BASEMENT -1</string>
+    <string name="basement2">BASEMENT -2</string>
+    <string name="garden">GARDEN</string>
+    <string name="parkVacancy">Park Vacancy</string>
 
 
 </resources>
