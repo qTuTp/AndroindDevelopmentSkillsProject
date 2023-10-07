@@ -13,7 +13,10 @@
         android:theme="@style/Theme.IICParking"
         tools:targetApi="31">
         <activity
-            android:name=".report"
+            android:name=".ProfileEdit"
+            android:exported="false" />
+        <activity
+            android:name=".Report"
             android:exported="false" />
         <activity
             android:name=".Profile"
@@ -24,11 +27,13 @@
         <activity
             android:name=".RegisterPage"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".MainActivity"

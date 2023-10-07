@@ -33,6 +33,7 @@
     <string name="issueTitle">Issue Title:</string>
     <string name="issueDescription">Issue Description:</string>
     <string name="submitButton">Submit</string>
+    <string name="discardButton">Discard</string>
 
 
 </resources>
