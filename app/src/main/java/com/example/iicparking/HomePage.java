@@ -5,10 +5,14 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-//TODO: Add tooltips for progress bar to display percentage
+import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
+
+
 public class HomePage extends AppCompatActivity {
 
     private AppCompatButton manageParkButton;
@@ -50,6 +54,7 @@ public class HomePage extends AppCompatActivity {
 
     }
 
+    //Assign Reference to the element in layout file
     protected void setReference(){
         manageParkButton = findViewById(R.id.parkManage);
         manageCarButton = findViewById(R.id.carManage);
@@ -59,10 +64,30 @@ public class HomePage extends AppCompatActivity {
         basement2 = findViewById(R.id.basement2ProgressBar);
         garden = findViewById(R.id.gardenProgressBar);
 
+        //progress bar will display tooltip on click
+        floor1.setOnClickListener(view -> showTooltipForProgress(floor1));
+        basement1.setOnClickListener(view -> showTooltipForProgress(basement1));
+        basement2.setOnClickListener(view -> showTooltipForProgress(basement2));
+        garden.setOnClickListener(view -> showTooltipForProgress(garden));
+
+
+        manageParkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        manageCarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     //Update the corresponding data on the visual of progress bar
-    protected void updateProgressBar(ProgressBar p, int percentage){
+    private void updateProgressBar(ProgressBar p, int percentage){
 
         if (percentage <= 40) {
             p.setProgressDrawable(AppCompatResources.getDrawable(this, R.drawable.custom_progress_bar_light));
@@ -75,6 +100,21 @@ public class HomePage extends AppCompatActivity {
         //Setting the value to progress bar
         p.setProgress(percentage);
 
+    }
+
+    //It will show the current percentage of the clicked progress bar
+    private void showTooltipForProgress(ProgressBar progressBar) {
+        int percentage = progressBar.getProgress();
+        new SimpleTooltip.Builder(this)
+                .anchorView(progressBar)
+                .text(percentage + "%")
+                .gravity(Gravity.TOP)
+                .animated(true)
+                .transparentOverlay(false)
+                .backgroundColor(getColor(R.color.white))
+                .textColor(getColor(R.color.INTIRed))
+                .build()
+                .show();
     }
 
 
