@@ -130,6 +130,7 @@
         app:strokeWidth="0dp"
         app:cardBackgroundColor="@color/white"
         android:padding="5dp"
+        android:id="@+id/parkVacancyCard"
 
         >
 
@@ -269,26 +270,9 @@
                 android:layout_marginVertical="2dp"
                 />
 
-<!--            <ProgressBar-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
-<!--                android:progressDrawable="@drawable/custom_progress_bar_light"-->
-<!--                android:max="100"-->
-<!--                android:progress="0"-->
-<!--                />-->
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
-
     </com.google.android.material.card.MaterialCardView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
