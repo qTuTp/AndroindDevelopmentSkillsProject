@@ -34,6 +34,11 @@
     <string name="issueDescription">Issue Description:</string>
     <string name="submitButton">Submit</string>
     <string name="discardButton">Discard</string>
+    <string name="popUpTitle">Current Time Slot</string>
+    <string name="startTime">1200</string>
+    <string name="endTime">1400</string>
+    <string name="hour">01</string>
+    <string name="minute">00</string>
 
 
 </resources>
