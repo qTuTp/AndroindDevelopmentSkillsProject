@@ -57,4 +57,18 @@
         <item name="fontFamily">@font/inter_bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="primaryDay">
+        <item name="fontFamily">@font/inter_extrabold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/INTIRed</item>
+
+    </style>
+
+    <style name="secondaryDay">
+        <item name="fontFamily">@font/inter_extrabold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/INTILightGrey2</item>
+
+    </style>
 </resources>
