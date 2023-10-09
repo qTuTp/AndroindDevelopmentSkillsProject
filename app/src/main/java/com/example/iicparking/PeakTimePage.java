@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -30,7 +31,7 @@ public class PeakTimePage extends AppCompatActivity {
 
         @Override
         public String getFormattedValue(float value) {
-            int hour = (int) value;
+            int hour = 23 - (int) value;
             return String.format(Locale.ENGLISH, "%02d:00", hour);
         }
 
@@ -198,13 +199,17 @@ public class PeakTimePage extends AppCompatActivity {
         List<BarEntry> values = new ArrayList<>();
 
         // Suppose you're collecting data every hour over 24 hours.
-        for (int hour = 0; hour < 24; hour++) {
+        // The reason of start from 23 and decrementing is because otherwise the graph will show top as 2300 and bottom as 0000
+        // For now, view the hour as the actual time, eg. 23 is 2300h. Ignore the 23 - hour as when i think my kepala also sakit, i use this just for
+        // Easier visualize of time only, if i use start from 0 then we may get confuse because the 0000h time maybe contain the data of 2300h
+        for (int hour = 23; hour >= 0; hour--) {
             float randomCarsCount = (float) (Math.random() * 500); // Random number of cars
-            values.add(new BarEntry(hour, randomCarsCount));
+            values.add(new BarEntry(23 - hour, randomCarsCount));
         }
 
 
 
+        //Assign color for the bar based on value
         List<Integer> colors = new ArrayList<>();
         for (BarEntry entry : values) {
             colors.add(getColorForEntry(entry));
@@ -213,11 +218,31 @@ public class PeakTimePage extends AppCompatActivity {
         BarDataSet set = new BarDataSet(values, "Number of Cars");
         set.setColors(colors);
 
-        XAxis xAxis = peakTimeChart.getXAxis();
-        xAxis.setValueFormatter(new HourAxisValueFormatter());
-
         BarData barData = new BarData(set);
         peakTimeChart.setData(barData);
+
+        XAxis xAxis = peakTimeChart.getXAxis();
+        xAxis.setValueFormatter(new HourAxisValueFormatter());
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f);
+        xAxis.setGranularityEnabled(true);
+
+        YAxis leftAxis = peakTimeChart.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setDrawAxisLine(false);
+        leftAxis.setDrawLabels(false);
+
+        YAxis rightAxis = peakTimeChart.getAxisRight();
+        rightAxis.setDrawGridLines(false);
+        rightAxis.setDrawAxisLine(false);
+        rightAxis.setDrawLabels(false);
+
+        peakTimeChart.getLegend().setEnabled(false);
+
+        peakTimeChart.getDescription().setEnabled(false);
+
         peakTimeChart.invalidate();
 
 
