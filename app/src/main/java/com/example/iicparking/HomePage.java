@@ -94,7 +94,7 @@ public class HomePage extends AppCompatActivity {
         } else if (percentage <= 70) {
             p.setProgressDrawable(AppCompatResources.getDrawable(this, R.drawable.custom_progress_bar_medium));
         } else {
-            p.setProgressDrawable(AppCompatResources.getDrawable(this, R.drawable.custom_progress_bar_light));
+            p.setProgressDrawable(AppCompatResources.getDrawable(this, R.drawable.custome_progress_bar_heavy));
         }
 
         //Setting the value to progress bar
@@ -110,7 +110,8 @@ public class HomePage extends AppCompatActivity {
                 .text(percentage + "%")
                 .gravity(Gravity.TOP)
                 .animated(true)
-                .transparentOverlay(false)
+                .showArrow(false)
+                .transparentOverlay(true)
                 .backgroundColor(getColor(R.color.white))
                 .textColor(getColor(R.color.INTIRed))
                 .build()
