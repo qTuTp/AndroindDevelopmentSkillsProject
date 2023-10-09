@@ -44,6 +44,9 @@
     <string name="location">Basement</string>
     <string name="popUpLeftButton">Cancel</string>
     <string name="popUpRightButton">Submit</string>
+    <string name="searchVehicleTitle">Search User's Vehicle</string>
+    <string name="searchBar">PXX 1234</string>
+    <string name="searchButton">Search</string>
 
 
 </resources>

@@ -21,16 +21,43 @@
             android:layout_height="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/profile_back"
+            android:background="@drawable/close"
             android:layout_gravity="right"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/popUpTitle"
+            android:text="@string/searchVehicleTitle"
             android:textColor="@color/INTIRed"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:fontFamily="@font/inter_bold"
-            android:id="@+id/title"/>
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"/>
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_background2"
+            android:hint="@string/searchBar"
+            android:fontFamily="@font/inter_bold"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/searchButton"
+            android:textColor="@color/white"
+            android:fontFamily="@font/inter_bold"
+            android:background="@drawable/primary_button_background"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
