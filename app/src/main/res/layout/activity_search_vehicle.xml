@@ -17,10 +17,10 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/close"
             android:layout_gravity="right"/>
 

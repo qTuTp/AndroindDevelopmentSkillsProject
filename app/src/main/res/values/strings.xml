@@ -58,6 +58,8 @@
     <string name="timeSlotEndTime">1400</string>
     <string name="locationTitle">Location:</string>
     <string name="locationValue">Basement</string>
+    <string name="alertLeftButton">Notify User</string>
+    <string name="alertRightButton">Contact User</string>
 
 
 
