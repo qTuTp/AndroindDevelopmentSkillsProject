@@ -19,13 +19,14 @@
         android:text="@string/sunday"
         app:layout_constraintEnd_toStartOf="@id/primaryDay"
         app:layout_constraintTop_toBottomOf="@id/primaryDay"
-        android:layout_marginTop="-32dp"
-        android:layout_marginEnd="-28dp"
+        android:layout_marginTop="-48dp"
+        android:layout_marginEnd="-44dp"
         android:id="@+id/priorDay"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        />
+        android:padding="16dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,12 +35,13 @@
         android:text="@string/tuesday"
         app:layout_constraintStart_toEndOf="@id/primaryDay"
         app:layout_constraintTop_toBottomOf="@id/primaryDay"
-        android:layout_marginTop="-32dp"
-        android:layout_marginStart="-28dp"
+        android:layout_marginTop="-48dp"
+        android:layout_marginStart="-44dp"
         android:id="@+id/afterDay"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
+        android:padding="16dp"
         />
 
     <TextView
