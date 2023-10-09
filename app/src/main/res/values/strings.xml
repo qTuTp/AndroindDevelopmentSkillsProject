@@ -47,6 +47,18 @@
     <string name="searchVehicleTitle">Search User's Vehicle</string>
     <string name="searchBar">PXX 1234</string>
     <string name="searchButton">Search</string>
+    <string name="alertTitle">Double Park Alert</string>
+    <string name="carPlate">ABC 4567</string>
+    <string name="idTitle">ID:</string>
+    <string name="idValue">P21013393</string>
+    <string name="phoneTitle">Phone No:</string>
+    <string name="phoneValue">016-XXXXXXX</string>
+    <string name="timeSlotTitle">Time Slot:</string>
+    <string name="timeSlotStartTime">1300</string>
+    <string name="timeSlotEndTime">1400</string>
+    <string name="locationTitle">Location:</string>
+    <string name="locationValue">Basement</string>
+
 
 
 </resources>
