@@ -1,0 +1,52 @@
+<!-- res/layout/centered_popup_layout.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/centeredPopupLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000" <!-- Semi-transparent background -->
+
+
+    <!-- Popup content (centered) -->
+<LinearLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:background="#FFFFFF" <!-- White background for the popup -->
+
+
+    <!-- Title Placeholder -->
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Title"
+android:textSize="18sp"
+android:layout_centerHorizontal="true"
+android:textColor="#FF0000" /> <!-- Red text color -->
+
+    <!-- Notification Details Placeholders (you can add more as needed) -->
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Placeholder for Notification Detail 1"
+android:id="@+id/notificationDetail1"
+android:textColor="#FF0000" /> <!-- Red text color -->
+
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Placeholder for Notification Detail 2"
+android:id="@+id/notificationDetail2"
+android:textColor="#FF0000" /> <!-- Red text color -->
+
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Placeholder for Notification Detail 3"
+android:id="@+id/notificationDetail3"
+android:textColor="#FF0000" /> <!-- Red text color -->
+
+    <!-- Close Button -->
+
+    </LinearLayout>
+    </RelativeLayout>
