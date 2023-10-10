@@ -14,7 +14,7 @@
         <shape android:shape="rectangle">
             <solid android:color="@color/white" /> <!-- Default background color -->
             <corners android:radius="10dp" />
-            <stroke android:color="@color/INTIGrey" android:width="2dp" /> <!-- Default border color -->
+            <stroke android:color="@color/INTIGrey" android:width="5dp" /> <!-- Default border color -->
         </shape>
     </item>
 </selector>
