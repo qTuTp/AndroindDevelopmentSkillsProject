@@ -17,6 +17,12 @@ public class HomePage extends AppCompatActivity {
 
     private AppCompatButton manageParkButton;
     private AppCompatButton manageCarButton;
+    private AppCompatButton parkSelectButton;
+    private AppCompatButton searchVehicleButton;
+    private AppCompatButton reportButton;
+    private AppCompatButton profileButton;
+    private AppCompatButton peakTimeButton;
+    private AppCompatButton notificationButton;
     private TextView carPlateNum;
     private ProgressBar floor1;
     private ProgressBar basement1;
@@ -63,6 +69,12 @@ public class HomePage extends AppCompatActivity {
         basement1 = findViewById(R.id.basement1ProgressBar);
         basement2 = findViewById(R.id.basement2ProgressBar);
         garden = findViewById(R.id.gardenProgressBar);
+        parkSelectButton = findViewById(R.id.parkSelectButton);
+        searchVehicleButton = findViewById(R.id.seachCarButton);
+        profileButton = findViewById(R.id.profileButton);
+        peakTimeButton = findViewById(R.id.peakTimeButton);
+        reportButton = findViewById(R.id.reportButton);
+        notificationButton = findViewById(R.id.notificationButton);
 
         //progress bar will display tooltip on click
         floor1.setOnClickListener(view -> showTooltipForProgress(floor1));
@@ -71,18 +83,14 @@ public class HomePage extends AppCompatActivity {
         garden.setOnClickListener(view -> showTooltipForProgress(garden));
 
 
-        manageParkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        manageParkButton.setOnClickListener(v -> {
 
-            }
         });
+        manageCarButton.setOnClickListener( v -> {
 
-        manageCarButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        });
+        parkSelectButton.setOnClickListener( v -> {
 
-            }
         });
     }
 
@@ -108,7 +116,7 @@ public class HomePage extends AppCompatActivity {
         new SimpleTooltip.Builder(this)
                 .anchorView(progressBar)
                 .text(percentage + "%")
-                .gravity(Gravity.TOP)
+                .gravity(Gravity.END)
                 .animated(true)
                 .showArrow(false)
                 .transparentOverlay(true)

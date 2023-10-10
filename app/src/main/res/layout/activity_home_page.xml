@@ -294,26 +294,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/scaled_car_selected_icon"
-                android:background="@color/white"
+                android:background="@drawable/white_background_button"
                 android:text="@string/parkSelect"
                 style="@style/vacancyLabel"
                 android:id="@+id/parkSelectButton"
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:paddingVertical="3dp"
+                android:clickable="true"
+                android:focusable="true"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/scaled_car_search_icon"
-                android:background="@color/white"
+                android:background="@drawable/white_background_button"
                 android:text="@string/searchCar"
                 style="@style/vacancyLabel"
                 android:id="@+id/seachCarButton"
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:paddingVertical="3dp"
+                android:clickable="true"
+                android:focusable="true"
 
                 />
 
@@ -329,26 +333,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/scaled_report_icon"
-                android:background="@color/white"
+                android:background="@drawable/white_background_button"
                 android:text="@string/report"
                 style="@style/vacancyLabel"
                 android:id="@+id/reportButton"
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:paddingVertical="3dp"
+                android:clickable="true"
+                android:focusable="true"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/scaled_profile_icon"
-                android:background="@color/white"
-                android:text="@string/searchCar"
+                android:background="@drawable/white_background_button"
+                android:text="@string/profile"
                 style="@style/vacancyLabel"
                 android:id="@+id/profileButton"
                 android:layout_weight="1"
                 android:textAllCaps="false"
                 android:paddingVertical="3dp"
+                android:clickable="true"
+                android:focusable="true"
 
                 />
 
@@ -364,24 +372,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/scaled_peak_time_icon"
-                android:background="@color/white"
+                android:background="@drawable/white_background_button"
                 android:text="@string/peak"
                 style="@style/vacancyLabel"
                 android:id="@+id/peakTimeButton"
                 android:layout_weight="1"
                 android:paddingVertical="3dp"
+                android:clickable="true"
+                android:focusable="true"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:drawableTop="@drawable/scaled_notification_icon"
-                android:background="@color/white"
+                android:background="@drawable/white_background_button"
                 android:text="@string/notif"
                 style="@style/vacancyLabel"
                 android:id="@+id/notificationButton"
                 android:layout_weight="1"
                 android:paddingVertical="3dp"
+                android:clickable="true"
+                android:focusable="true"
 
                 />
 

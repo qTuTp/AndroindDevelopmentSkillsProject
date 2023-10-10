@@ -194,9 +194,8 @@ public class PeakTimePage extends AppCompatActivity {
 
     //Update the visual of the chart
     private void updateChart(){
-
-
         List<BarEntry> values = new ArrayList<>();
+
 
         // Suppose you're collecting data every hour over 24 hours.
         // The reason of start from 23 and decrementing is because otherwise the graph will show top as 2300 and bottom as 0000
@@ -220,6 +219,11 @@ public class PeakTimePage extends AppCompatActivity {
 
         BarData barData = new BarData(set);
         peakTimeChart.setData(barData);
+
+        peakTimeChart.setHighlightFullBarEnabled(false);
+        peakTimeChart.setHighlightPerTapEnabled(false);
+        peakTimeChart.setHighlightPerDragEnabled(false);
+
 
         XAxis xAxis = peakTimeChart.getXAxis();
         xAxis.setValueFormatter(new HourAxisValueFormatter());
@@ -249,12 +253,17 @@ public class PeakTimePage extends AppCompatActivity {
     }
 
     private int getColorForEntry(BarEntry entry) {
+
+        int highColor = ContextCompat.getColor(this, R.color.progressHeavy);
+        int mediumColor = ContextCompat.getColor(this, R.color.progressMedium);
+        int lowColor = ContextCompat.getColor(this, R.color.progressLight);
+
         if (entry.getY() > 400) {
-            return Color.RED;
+            return highColor;
         } else if (entry.getY() > 250) {
-            return Color.YELLOW;
+            return mediumColor;
         } else {
-            return Color.GREEN;
+            return lowColor;
         }
     }
 
