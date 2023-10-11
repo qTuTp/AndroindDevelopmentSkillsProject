@@ -13,6 +13,7 @@ import android.widget.TextView;
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 
+
 public class HomePage extends AppCompatActivity {
 
     private AppCompatButton manageParkButton;
@@ -124,6 +125,8 @@ public class HomePage extends AppCompatActivity {
                 .textColor(getColor(R.color.INTIRed))
                 .build()
                 .show();
+
+
     }
 
 
