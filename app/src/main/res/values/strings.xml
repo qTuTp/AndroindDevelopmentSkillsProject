@@ -22,6 +22,44 @@
     <string name="login">Login</string>
     <string name="noAccount">Do not have a Account ?</string>
     <string name="signup">Sign Up !</string>
+    <string name="profileTitle">Profile</string>
+    <string name="profileName">Bong Kai Min</string>
+    <string name="profileMatrix">P21013393</string>
+    <string name="profileEmail">p21013393@student.newinti.edu.my</string>
+    <string name="profilePhone">012-xxxxxxx</string>
+    <string name="profilePassword">01234567890</string>
+    <string name="editProfileButton">Edit Profile</string>
+    <string name="reportTitle">Report Issue</string>
+    <string name="issueTitle">Issue Title:</string>
+    <string name="issueDescription">Issue Description:</string>
+    <string name="submitButton">Submit</string>
+    <string name="discardButton">Discard</string>
+    <string name="popUpTitle">Current Time Slot</string>
+    <string name="startTime">1200</string>
+    <string name="endTime">1400</string>
+    <string name="hourValue">01</string>
+    <string name="minuteValue">00</string>
+    <string name="hourH">H</string>
+    <string name="minuteM">MIN</string>
+    <string name="location">Basement</string>
+    <string name="popUpLeftButton">Cancel</string>
+    <string name="popUpRightButton">Submit</string>
+    <string name="searchVehicleTitle">Search User's Vehicle</string>
+    <string name="searchBar">PXX 1234</string>
+    <string name="searchButton">Search</string>
+    <string name="alertTitle">Double Park Alert</string>
+    <string name="carPlate">ABC 4567</string>
+    <string name="idTitle">ID:</string>
+    <string name="idValue">P21013393</string>
+    <string name="phoneTitle">Phone No:</string>
+    <string name="phoneValue">016-XXXXXXX</string>
+    <string name="timeSlotTitle">Time Slot:</string>
+    <string name="timeSlotStartTime">1300</string>
+    <string name="timeSlotEndTime">1400</string>
+    <string name="locationTitle">Location:</string>
+    <string name="locationValue">Basement</string>
+    <string name="alertLeftButton">Notify User</string>
+    <string name="alertRightButton">Contact User</string>
     <string name="parkManage">Parking Management</string>
     <string name="manageCar">Manage Vehicle</string>
     <string name="f1">FLOOR 1</string>
@@ -52,6 +90,7 @@
         <item>Friday</item>
         <item>Saturday</item>
     </string-array>
+
 
 
 
