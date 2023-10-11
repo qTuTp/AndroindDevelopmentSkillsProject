@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/input_background"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:paddingBottom="30dp"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    android:id="@+id/rectangle1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yourVehicle"
+        android:textColor="@color/INTIRed"
+        android:textSize="25dp"
+        android:fontFamily="@font/inter_bold"
+        android:id="@+id/pop_up_title"
+        android:layout_marginStart="50dp"
+        />
+
+    <Spinner
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:id="@+id/spinner_2"
+        android:layout_marginVertical="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addNew_vehicle"
+        android:textSize="13dp"
+        android:layout_marginStart="73dp"
+        android:textStyle="bold"
+        android:textColor="@color/INTIRed"
+        android:id="@+id/addNew"
+        />
+</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
