@@ -6,14 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/ipark_logo"
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:src="@mipmap/ipark_logo"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+
+<!--        />-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login Page"
+        android:background="@drawable/primary_button_background"
+        style="@style/buttonTextWhite"
+        android:paddingHorizontal="10dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/loginP"
+        android:layout_marginVertical="10dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register Page"
+        android:background="@drawable/primary_button_background"
+        style="@style/buttonTextWhite"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintTop_toBottomOf="@id/loginP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/registerP"
+        android:layout_marginVertical="10dp"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Home Page"
+        android:background="@drawable/primary_button_background"
+        style="@style/buttonTextWhite"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintTop_toBottomOf="@id/registerP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/homeP"
+        android:layout_marginVertical="10dp"
+
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peak Time Page"
+        android:background="@drawable/primary_button_background"
+        style="@style/buttonTextWhite"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintTop_toBottomOf="@id/homeP"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/peakP"
+        android:layout_marginVertical="10dp"
 
         />
 
