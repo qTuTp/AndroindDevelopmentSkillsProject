@@ -97,6 +97,13 @@
     <string name="cPlate"> Car Plate :</string>
     <string name="cColor"> Car Color :</string>
     <string name="addVehicle">Add Vehicle</string>
+    <string name="noti2CarPlate">ABC 1234</string>
+    <string name="addtime" >Add Time</string>
+    <string name="exitparking" >Exit Parking</string>
+
+
+
+
 
     <string-array name="location">
         <item>Level 1</item>
