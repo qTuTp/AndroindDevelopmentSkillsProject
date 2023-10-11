@@ -60,6 +60,37 @@
     <string name="locationValue">Basement</string>
     <string name="alertLeftButton">Notify User</string>
     <string name="alertRightButton">Contact User</string>
+    <string name="parkManage">Parking Management</string>
+    <string name="manageCar">Manage Vehicle</string>
+    <string name="f1">FLOOR 1</string>
+    <string name="basement1">BASEMENT -1</string>
+    <string name="basement2">BASEMENT -2</string>
+    <string name="garden">GARDEN</string>
+    <string name="parkVacancy">Park Vacancy</string>
+    <string name="parkSelect">Parking Selection</string>
+    <string name="searchCar">Search Vehicle</string>
+    <string name="report">Report</string>
+    <string name="profile">Profile</string>
+    <string name="peak">Peak Time</string>
+    <string name="notif">Notification</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+
+    <string-array name="days_of_week">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+
 
 
 
