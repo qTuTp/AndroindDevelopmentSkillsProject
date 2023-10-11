@@ -6,5 +6,10 @@
     <color name="INTIRed">#CD242D</color>
     <color name="INTIGrey">#636363</color>
     <color name="INTILightGrey">#bebcb9</color>
+    <color name="INTILightGrey2">#D9D9D9</color>
+    <color name="progressLight">#FF7A82</color>
+    <color name="progressBackground">#FFC1C5</color>
+    <color name="progressMedium">#F28500</color>
+    <color name="progressHeavy">#E20C18</color>
 
 </resources>

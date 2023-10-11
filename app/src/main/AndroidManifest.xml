@@ -31,6 +31,12 @@
             android:name=".Profile"
             android:exported="false" />
         <activity
+            android:name=".PeakTimePage"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
             android:name=".LoginPage"
             android:exported="false" />
         <activity
