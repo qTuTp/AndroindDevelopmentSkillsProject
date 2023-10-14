@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:id="@+id/startTime"
@@ -58,6 +59,60 @@
                 android:textSize="25dp"
                 android:fontFamily="@font/inter_bold"
                 android:layout_marginStart="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/locationTitle"
+                android:textSize="20dp"
+                android:fontFamily="@font/inter_bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pmLocationValue"
+                android:textSize="20dp"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginStart="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="124dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pmLeftButton"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_bold"
+                android:background="@drawable/primary_button_background"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pmRightButton"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_bold"
+                android:background="@drawable/primary_button_background"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:layout_marginStart="40dp"/>
+
         </LinearLayout>
 
     </LinearLayout>

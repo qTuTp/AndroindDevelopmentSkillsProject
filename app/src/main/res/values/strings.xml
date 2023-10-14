@@ -99,6 +99,9 @@
     <string name="pmCarPlate">ABC 1234</string>
     <string name="pmStartTime">1200</string>
     <string name="pmEndTime">1400</string>
+    <string name="pmLocationValue">Basement</string>
+    <string name="pmLeftButton">Add Time</string>
+    <string name="pmRightButton">Exit Parking</string>
 
     <string-array name="location">
         <item>Level 1</item>
