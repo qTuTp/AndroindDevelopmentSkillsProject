@@ -28,6 +28,7 @@
             android:textColor="@color/INTIRed"
             android:textSize="35dp"
             android:fontFamily="@font/inter_bold"
+            android:layout_gravity="center"
             android:id="@+id/title"/>
 
         <LinearLayout

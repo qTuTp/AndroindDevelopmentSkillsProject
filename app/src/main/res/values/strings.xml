@@ -96,6 +96,9 @@
     <string name="cPlate"> Car Plate :</string>
     <string name="cColor"> Car Color :</string>
     <string name="addVehicle">Add Vehicle</string>
+    <string name="pmCarPlate">ABC 1234</string>
+    <string name="pmStartTime">1200</string>
+    <string name="pmEndTime">1400</string>
 
     <string-array name="location">
         <item>Level 1</item>
