@@ -102,6 +102,13 @@
     <string name="pmLocationValue">Basement</string>
     <string name="pmLeftButton">Add Time</string>
     <string name="pmRightButton">Exit Parking</string>
+    <string name="notificationPopUpTitle">Parking Reminder Alert</string>
+    <string name="notificationDescription">Your parked vehicle needs to be relocated. Please move it to avoid any issues. Thanks for your cooperation!</string>
+    <string name="edit_name">Name</string>
+    <string name="edit_email">Email</string>
+    <string name="edit_phone">Phone No</string>
+    <string name="edit_password">Password</string>
+    <string name="edit_comfirmPassword">Confirm Password</string>
 
     <string-array name="location">
         <item>Level 1</item>
