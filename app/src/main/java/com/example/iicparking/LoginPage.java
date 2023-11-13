@@ -30,7 +30,7 @@ public class LoginPage extends AppCompatActivity {
 
     //Set the reference and listener to the element in the layout file
     protected void setReference(){
-        email = findViewById(R.id.emailInput);
+        email = findViewById(R.id.matrixInput);
         password = findViewById(R.id.passwordInput);
         forgetPasswordButton = findViewById(R.id.forgetPasswordButton);
         logButton = findViewById(R.id.loginButton);

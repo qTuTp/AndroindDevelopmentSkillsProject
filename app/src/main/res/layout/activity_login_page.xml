@@ -38,12 +38,12 @@
         android:id="@+id/logo"/>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInput"
+        android:id="@+id/matrixInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxBackgroundColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/logo"
-        android:hint="@string/email"
+        android:hint="@string/matriculationNo"
         app:boxStrokeColor="@color/INTIRed"
         app:endIconMode="clear_text"
         app:hintTextColor="@color/black"
@@ -64,7 +64,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxBackgroundColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/emailInput"
+        app:layout_constraintTop_toBottomOf="@id/matrixInput"
         android:hint="@string/password"
         app:boxStrokeColor="@color/INTIRed"
         app:endIconMode="clear_text"
