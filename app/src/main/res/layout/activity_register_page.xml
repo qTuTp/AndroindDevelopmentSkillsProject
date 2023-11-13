@@ -96,205 +96,200 @@
     </LinearLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        style="@style/regularWord"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/titleName"
 
-        />
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        style="@style/regularWord"
-        android:background="@drawable/input_background"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintTop_toBottomOf="@id/titleName"
-        app:layout_constraintStart_toStartOf="@id/titleName"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputName"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/matriculationNo"
-        app:layout_constraintStart_toEndOf="@id/inputName"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/header"
-        android:layout_marginStart="30dp"
-        style="@style/regularWord"
-        android:layout_marginTop="20dp"
-        android:id="@+id/titleId"
-
-        />
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        style="@style/regularWord"
-        android:background="@drawable/input_background"
-        app:layout_constraintWidth_percent="0.45"
-        app:layout_constraintTop_toBottomOf="@id/titleId"
-        app:layout_constraintStart_toStartOf="@id/titleId"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        android:id="@+id/inputId"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/email"
-        app:layout_constraintTop_toBottomOf="@id/inputName"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/regularWord"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/titleEmail"
-
-        />
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        style="@style/regularWord"
-        android:background="@drawable/input_background"
-        app:layout_constraintTop_toBottomOf="@id/titleEmail"
-        app:layout_constraintStart_toStartOf="@id/titleEmail"
-        app:layout_constraintEnd_toEndOf="@id/inputId"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        android:id="@+id/inputEmail"
-
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/phoneNo"
-        app:layout_constraintTop_toBottomOf="@id/inputEmail"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/regularWord"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/titlePhone"
-
-        />
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        style="@style/regularWord"
-        android:background="@drawable/input_background"
-        app:layout_constraintTop_toBottomOf="@id/titlePhone"
-        app:layout_constraintStart_toStartOf="@id/titlePhone"
-        app:layout_constraintEnd_toEndOf="@id/inputId"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        android:id="@+id/inputPhone"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/password"
-        app:layout_constraintTop_toBottomOf="@id/inputPhone"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/regularWord"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/passwordTitle"
-
-        />
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        style="@style/regularWord"
-        android:background="@drawable/input_background"
-        app:layout_constraintTop_toBottomOf="@id/passwordTitle"
-        app:layout_constraintStart_toStartOf="@id/titlePhone"
-        app:layout_constraintEnd_toEndOf="@id/inputId"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        android:id="@+id/inputPassword"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/confirmPassword"
-        app:layout_constraintTop_toBottomOf="@id/inputPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/regularWord"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/titleConfirmPassword"
-
-        />
-
-    <EditText
-        android:layout_width="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        style="@style/regularWord"
-        android:background="@drawable/input_background"
-        app:layout_constraintTop_toBottomOf="@id/titleConfirmPassword"
-        app:layout_constraintStart_toStartOf="@id/titlePhone"
-        app:layout_constraintEnd_toEndOf="@id/inputId"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        android:id="@+id/inputConfirmPassword"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/registerButton"
-        android:background="@drawable/primary_button_background"
-        app:layout_constraintTop_toBottomOf="@id/inputConfirmPassword"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="@id/inputConfirmPassword"
-        style="@style/buttonTextWhite"
-        android:text="@string/registerButton"
-        android:textAllCaps="false"
-        android:padding="-10dp"
-        android:paddingHorizontal="10dp"
+        app:layout_constraintEnd_toStartOf="@id/inputMatrix"
+        android:hint="@string/name"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHeight_max="60dp"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintEnd_toStartOf="@id/cancelButton"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputMatrix"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toEndOf="@id/inputName"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/matriculationNo"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHeight_max="60dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/inputName"
+        android:hint="@string/email"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHeight_max="60dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/inputEmail"
+        android:hint="@string/phoneNo"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHeight_max="60dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/inputPhone"
+        android:hint="@string/password"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="password_toggle"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHeight_max="60dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/inputPassword"
+        android:hint="@string/confirmPassword"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="password_toggle"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintHeight_max="60dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/registerButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/registerButton"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/INTIRed"
+        style="@style/Widget.MaterialComponents.Button"
+        app:layout_constraintTop_toBottomOf="@id/inputConfirmPassword"
+        app:layout_constraintStart_toStartOf="@id/inputConfirmPassword"
+        app:layout_constraintEnd_toStartOf="@id/backButton"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintHeight_min="54dp"
+
+
+
+        app:layout_constraintHorizontal_weight="1"
+
 
         />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_marginStart="50dp"
-        android:id="@+id/cancelButton"
-        android:layout_width="120dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
-        android:textAllCaps="false"
-        app:layout_constraintStart_toEndOf="@id/registerButton"
-        app:layout_constraintTop_toTopOf="@id/registerButton"
+        android:textColor="@color/INTIRed"
+        android:backgroundTint="@color/white"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/inputConfirmPassword"
         app:layout_constraintEnd_toEndOf="@id/inputConfirmPassword"
+        app:layout_constraintStart_toEndOf="@id/registerButton"
         app:layout_constraintHorizontal_chainStyle="packed"
-        android:background="@drawable/secondary_button_background"
-        style="@style/buttonTextRed"
-         />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:strokeColor="@color/INTIRed"
+        app:layout_constraintHeight_min="54dp"
 
 
 
-
+        />
 
 
 
