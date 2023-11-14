@@ -96,6 +96,21 @@
     <string name="cPlate"> Car Plate :</string>
     <string name="cColor"> Car Color :</string>
     <string name="addVehicle">Add Vehicle</string>
+
+    <string name="pmCarPlate">ABC 1234</string>
+    <string name="pmStartTime">1200</string>
+    <string name="pmEndTime">1400</string>
+    <string name="pmLocationValue">Basement</string>
+    <string name="pmLeftButton">Add Time</string>
+    <string name="pmRightButton">Exit Parking</string>
+    <string name="notificationPopUpTitle">Parking Reminder Alert</string>
+    <string name="notificationDescription">Your parked vehicle needs to be relocated. Please move it to avoid any issues. Thanks for your cooperation!</string>
+    <string name="edit_name">Name</string>
+    <string name="edit_email">Email</string>
+    <string name="edit_phone">Phone No</string>
+    <string name="edit_password">Password</string>
+    <string name="edit_comfirmPassword">Confirm Password</string>
+
     <string name="forgetPass">Forget Password</string>
     <string name="newPass">New Password</string>
     <string name="promptNewPass">Enter New Password</string>
@@ -103,6 +118,7 @@
     <string name="promptEmail">Enter Your Email Address</string>
     <string name="cont">Continue</string>
     <string name="backToLogin">Return Back To Login</string>
+
 
     <string-array name="location">
         <item>Level 1</item>
