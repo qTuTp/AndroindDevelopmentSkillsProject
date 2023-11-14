@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.DocumentReference;
@@ -34,6 +37,7 @@ public class RegisterPage extends AppCompatActivity {
     private MaterialButton registerButton;
     private MaterialButton cancelButton;
     private FirebaseFirestore db;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +59,30 @@ public class RegisterPage extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         cancelButton = findViewById(R.id.cancelButton);
         db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         registerButton.setOnClickListener(view -> {
             if(validateFields()){
-                String matriculationNumber = matrix.getEditText().getText().toString();
+                String matriculationNumber = matrix.getEditText().getText().toString().trim();
+                String userEmail = email.getEditText().getText().toString().trim();
+                String userPassword = password.getEditText().getText().toString().trim();
 
-                // Check if the matriculation number is already used in Firestore
-                checkMatriculationNumber(matriculationNumber);
+                // Create a new user with email and password
+                auth.createUserWithEmailAndPassword(userEmail, userPassword)
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                // Registration success, update UI with the signed-in user's information
+                                FirebaseUser user = auth.getCurrentUser();
+                                if (user != null) {
+                                    // Now you have the authenticated user, you can proceed to store additional user data
+                                    checkMatriculationNumber(matriculationNumber);
+                                }
+                            } else {
+                                // If registration fails, display a message to the user.
+                                Toast.makeText(RegisterPage.this, "Registration failed: " + task.getException().getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
 
         });
@@ -107,6 +128,7 @@ public class RegisterPage extends AppCompatActivity {
             } else {
                 // Handle errors
                 Toast.makeText(RegisterPage.this, "Error checking matriculation number: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("Register Page", task.getException().getMessage());
             }
         });
     }
@@ -116,7 +138,6 @@ public class RegisterPage extends AppCompatActivity {
         String userName = name.getEditText().getText().toString();
         String userEmail = email.getEditText().getText().toString();
         String userPhone = phone.getEditText().getText().toString();
-        String userPassword = password.getEditText().getText().toString();
 
         // Create a new document with the specified matriculation number
         DocumentReference newUserRef = db.collection("users").document(matriculationNumber);
@@ -125,7 +146,6 @@ public class RegisterPage extends AppCompatActivity {
         userData.put("name", userName);
         userData.put("email", userEmail);
         userData.put("phone", userPhone);
-        userData.put("password", userPassword);
         userData.put("fcmToken", fcmToken);
 
         // Set the data of the document to the User object
@@ -185,11 +205,8 @@ public class RegisterPage extends AppCompatActivity {
         if (TextUtils.isEmpty(password.getEditText().getText())) {
             password.setError("Password is required");
             isValid = false;
-        } else if (password.getEditText().getText().length() < 8) {
-            password.setError("Password must be at least 8 characters");
-            isValid = false;
-        }else if (!(password.getEditText().getText().toString()).matches("^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$")) {
-            password.setError("Password must contain both letters and numbers, and be at least 8 characters");
+        } else if (password.getEditText().getText().length() < 6) {
+            password.setError("Password must be at least 6 characters");
             isValid = false;
         } else {
             password.setError(null);
