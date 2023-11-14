@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -122,7 +124,20 @@ public class HomePage extends AppCompatActivity {
             startActivity(intent);
         });
         logoutButton.setOnClickListener( v -> {
+            // TODO: Add confirmation
+            Intent intent = new Intent(HomePage.this, LoginPage.class);
+            startActivity(intent);
+            finish();
 
+            SharedPreferences prefs = getSharedPreferences("UserPreference", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("matriculationNo", "");
+            editor.putString("userName", "");
+            editor.putString("email", "");
+            editor.putString("phone", "");
+            editor.putString("status", "");
+
+            editor.apply();
         });
     }
 

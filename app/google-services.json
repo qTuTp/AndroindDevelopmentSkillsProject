@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1028806307400",
+    "project_id": "intiparkingsystemandroid",
+    "storage_bucket": "intiparkingsystemandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028806307400:android:162e3ca4742c429915f27d",
+        "android_client_info": {
+          "package_name": "com.example.iicparking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClj0x284cRsbGKMJFXBBh3oCv46BlgGkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
