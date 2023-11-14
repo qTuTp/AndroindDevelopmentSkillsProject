@@ -2,7 +2,9 @@ package com.example.iicparking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -131,6 +133,17 @@ public class RegisterPage extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> {
                     // Handle success, e.g., show a success message
                     Toast.makeText(RegisterPage.this, "Registration successful", Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences prefs = getSharedPreferences("UserPreference", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("matriculationNo", matriculationNumber);
+                    editor.putString("userName", userName);
+                    editor.putString("email", userEmail);
+                    editor.putString("phone", userPhone);
+                    editor.putString("status", "login");
+
+                    editor.apply();
+
                     Intent intent = new Intent(RegisterPage.this, HomePage.class);
                     startActivity(intent);
                 })
@@ -194,5 +207,12 @@ public class RegisterPage extends AppCompatActivity {
 
 
         return isValid;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(RegisterPage.this,LoginPage.class);
+        startActivity(intent);
+        finish();
     }
 }
