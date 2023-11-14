@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,6 +28,7 @@ public class HomePage extends AppCompatActivity {
     private AppCompatButton profileButton;
     private AppCompatButton peakTimeButton;
     private AppCompatButton notificationButton;
+    private ImageButton logoutButton;
     private TextView carPlateNum;
     private ProgressBar floor1;
     private ProgressBar basement1;
@@ -79,6 +81,7 @@ public class HomePage extends AppCompatActivity {
         peakTimeButton = findViewById(R.id.peakTimeButton);
         reportButton = findViewById(R.id.reportButton);
         notificationButton = findViewById(R.id.notificationButton);
+        logoutButton = findViewById(R.id.logout);
 
         //progress bar will display tooltip on click
         floor1.setOnClickListener(view -> showTooltipForProgress(floor1));
@@ -117,6 +120,9 @@ public class HomePage extends AppCompatActivity {
         notificationButton.setOnClickListener( v -> {
             Intent intent = new Intent(HomePage.this, NotificationListPage.class);
             startActivity(intent);
+        });
+        logoutButton.setOnClickListener( v -> {
+
         });
     }
 

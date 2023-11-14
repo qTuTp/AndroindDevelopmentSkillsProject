@@ -86,7 +86,7 @@
     <string name="blockCar">Blocked Car :</string>
     <string name="addBlocked">Add New Blocked Car +</string>
     <string name="returnButton">Return</string>
-    <string name="comfirmButton">Comfirm</string>
+    <string name="comfirmButton">Confirm</string>
     <string name="select_location">Choose Your Location</string>
     <string name="slotSelect">Slot Selection</string>
     <string name="yourVehicle">Your Vehicle</string>
@@ -96,6 +96,7 @@
     <string name="cPlate"> Car Plate :</string>
     <string name="cColor"> Car Color :</string>
     <string name="addVehicle">Add Vehicle</string>
+
     <string name="pmCarPlate">ABC 1234</string>
     <string name="pmStartTime">1200</string>
     <string name="pmEndTime">1400</string>
@@ -109,6 +110,15 @@
     <string name="edit_phone">Phone No</string>
     <string name="edit_password">Password</string>
     <string name="edit_comfirmPassword">Confirm Password</string>
+
+    <string name="forgetPass">Forget Password</string>
+    <string name="newPass">New Password</string>
+    <string name="promptNewPass">Enter New Password</string>
+    <string name="promptConfirmPass">Confirm New Password</string>
+    <string name="promptEmail">Enter Your Email Address</string>
+    <string name="cont">Continue</string>
+    <string name="backToLogin">Return Back To Login</string>
+
 
     <string-array name="location">
         <item>Level 1</item>
@@ -125,8 +135,11 @@
         <item>Friday</item>
         <item>Saturday</item>
     </string-array>
-
-
-
+    <string-array name="title_issue">
+        <item>Issue 1</item>
+        <item>Issue 2</item>
+        <item>Issue 3</item>
+        <item>Issue 4</item>
+    </string-array>
 
 </resources>

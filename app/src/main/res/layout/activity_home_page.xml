@@ -65,6 +65,22 @@
 
 
                 />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/logout_vector"
+                app:layout_constraintTop_toTopOf="@id/INTILogo2"
+                app:layout_constraintBottom_toBottomOf="@id/INTILogo2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/INTILogo2"
+                android:id="@+id/logout"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackground"
+
+
+                />
             
             <TextView
                 android:layout_width="240dp"
