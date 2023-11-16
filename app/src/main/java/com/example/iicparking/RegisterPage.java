@@ -154,7 +154,7 @@ public class RegisterPage extends AppCompatActivity {
                     // Handle success, e.g., show a success message
                     Toast.makeText(RegisterPage.this, "Registration successful", Toast.LENGTH_SHORT).show();
 
-                    SharedPreferences prefs = getSharedPreferences("UserPreference", Context.MODE_PRIVATE);
+                    SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("matriculationNo", matriculationNumber);
                     editor.putString("userName", userName);

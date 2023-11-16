@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginPage extends AppCompatActivity {
+    final private String TAG = "LOGINPAGE";
 
     private TextInputLayout email;
     private TextInputLayout password;
@@ -179,6 +180,8 @@ public class LoginPage extends AppCompatActivity {
         editor.putString("phone", userPhone);
         editor.putString("status", "login");
         editor.apply();
+
+        Log.d(TAG, matricNumber + userName + userEmail + userPhone);
     }
 
     private void updateFCMTokenWithRetry(String matricNumber, int remainingRetries) {

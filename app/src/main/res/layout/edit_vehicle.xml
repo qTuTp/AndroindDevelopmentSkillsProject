@@ -1,92 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    app:cardBackgroundColor="@color/white"
+    >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/input_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingBottom="50dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:id="@+id/rectangle1">
+        android:padding="30dp"
+        android:minWidth="400dp"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/yourVehicle"
+            android:text="@string/edit_vehicle"
             android:textColor="@color/INTIRed"
             android:textSize="30dp"
             android:fontFamily="@font/inter_bold"
-            android:id="@+id/pop_up_title"
+            android:id="@+id/title"
             android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
 
-        <TextView
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="30dp"
-            android:id="@+id/carPlate"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/carPlateNo"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:fontFamily="@font/inter_bold"
-            android:paddingVertical="7dp"
-            android:text="@string/carPlate"
-            android:textColor="@color/INTIRed"
-            android:textSize="15dp" />
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/car_plate_number"
+            app:boxStrokeColor="@color/INTIRed"
+            app:endIconMode="clear_text"
+            app:hintTextColor="@color/black"
+            android:layout_marginHorizontal="20dp"
+            app:errorEnabled="true"
+            android:layout_marginTop="10dp"
+            >
 
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            style="@style/regularWord"
-            android:background="@drawable/input_background"
-            android:paddingVertical="10dp"
-            />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                />
 
-        <TextView
-            android:layout_marginTop="9dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/carColor"
-            android:textColor="@color/INTIRed"
-            android:textSize="15dp"
-            android:fontFamily="@font/inter_bold"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/carColor"
-            android:paddingVertical="7dp"
-            />
-
-        <EditText
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/regularWord"
-            android:background="@drawable/input_background"
-            android:paddingVertical="10dp"
-            />
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/carPlateNo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:hint="@string/car_color"
+            app:boxStrokeColor="@color/INTIRed"
+            app:endIconMode="clear_text"
+            app:hintTextColor="@color/black"
+            android:layout_marginHorizontal="20dp"
+            app:errorEnabled="true"
+            android:layout_marginTop="5dp"
+            >
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_marginStart="0dp"
-            android:layout_width="120dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/primary_button_background"
-            android:layout_marginTop="20dp"
-            style="@style/buttonTextWhite"
-            android:text="@string/comfirmButton"
-            android:textAllCaps="false"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="10dp"
-            android:layout_gravity="center"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/INTIRed"
+            style="@style/Widget.MaterialComponents.Button"
+            app:layout_constraintTop_toBottomOf="@id/carColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cancelButton"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintHeight_min="54dp"
+            app:layout_constraintHorizontal_weight="1"
+
+
             />
 
-    </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/INTIRed"
+            android:backgroundTint="@color/white"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintTop_toBottomOf="@id/carColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/saveButton"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:strokeColor="@color/INTIRed"
+            app:layout_constraintHeight_min="54dp"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>
