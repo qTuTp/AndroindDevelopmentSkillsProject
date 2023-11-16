@@ -388,14 +388,16 @@ public class HomePage extends AppCompatActivity {
 
 
         manageParkButton.setOnClickListener(v -> {
-
+            showManageParkDialog();
         });
         manageCarButton.setOnClickListener( v -> {
             showManageCarDialog();
 
         });
         parkSelectButton.setOnClickListener( v -> {
+            // TODO: Add validation to check if the user still park or not
             Intent intent = new Intent(HomePage.this, Slot_Selection.class);
+            intent.putExtra("currentVehicle", currentVehiclePlate);
             startActivity(intent);
 
         });
@@ -431,7 +433,7 @@ public class HomePage extends AppCompatActivity {
             MaterialButton cancelButton = logoutConfirmDialog.findViewById(R.id.cancelButton);
 
             confirmButton.setOnClickListener(view -> {
-                SharedPreferences prefs = getSharedPreferences("UserPreference", Context.MODE_PRIVATE);
+                SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString("matriculationNo", "");
                 editor.putString("userName", "");
@@ -457,6 +459,88 @@ public class HomePage extends AppCompatActivity {
 
 
         });
+    }
+
+    private void showManageParkDialog(){
+        SharedPreferences prefs = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
+        String status = prefs.getString("status", "");
+        Log.d(TAG, status);
+        // TODO: Need to check if the user have parked or not, if not, show not park yet dialog
+
+        if (status.equals("parked")){
+            Dialog manageParkDialog = new Dialog(this);
+            manageParkDialog.setContentView(R.layout.park_manage_dialog);
+            manageParkDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            manageParkDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+            manageParkDialog.setCancelable(true);
+
+
+            String carPlateStr = prefs.getString("carPlate", "");
+            String startTimeStr = prefs.getString("startTime", "");
+            String endTimeStr = prefs.getString("endTime", "");
+            String locationStr = prefs.getString("location", "");
+
+            TextView carPlate = manageParkDialog.findViewById(R.id.carPlateNo);
+            TextView startTime = manageParkDialog.findViewById(R.id.startTime);
+            TextView endTime = manageParkDialog.findViewById(R.id.endTime);
+            TextView location = manageParkDialog.findViewById(R.id.location);
+
+            MaterialButton addTimeButton = manageParkDialog.findViewById(R.id.addTimeButton);
+            MaterialButton exitParkingButton = manageParkDialog.findViewById(R.id.finishParkingButton);
+
+            addTimeButton.setOnClickListener(view -> {
+                manageParkDialog.dismiss();
+
+            });
+
+            exitParkingButton.setOnClickListener(view -> {
+                //TODO: Remove parking from local and update the status on firestore to exited
+                String documentId = prefs.getString("documentID", "");
+                String date = prefs.getString("date", "");
+
+                Log.d(TAG, documentId + " " + date);
+
+                DocumentReference logRef = db.collection("parkLog").document(date).collection("logs").document(documentId);
+
+                logRef.update("status", "exited").
+                        addOnSuccessListener(documentPreference -> {
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("status", "exited");
+                            editor.apply();
+                            manageParkDialog.dismiss();
+
+                        }).addOnFailureListener(e -> {
+                            Log.e(TAG, "Error updating park log status", e);
+                            Toast.makeText(this, "Error updating park log status", Toast.LENGTH_SHORT).show();
+                            manageParkDialog.dismiss();
+                        });
+
+
+            });
+            carPlate.setText(carPlateStr);
+            startTime.setText(startTimeStr);
+            endTime.setText(endTimeStr);
+            location.setText(locationStr);
+
+            manageParkDialog.show();
+        }else {
+            Dialog notParkedYetDialog = new Dialog(this);
+            notParkedYetDialog.setContentView(R.layout.not_park_yet_dialog);
+            notParkedYetDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            notParkedYetDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+            notParkedYetDialog.setCancelable(true);
+
+            MaterialButton closeButton = notParkedYetDialog.findViewById(R.id.closeButton);
+
+            closeButton.setOnClickListener(view -> {
+                notParkedYetDialog.dismiss();
+            });
+
+            notParkedYetDialog.show();
+        }
+
+
+
     }
 
     //Update the corresponding data on the visual of progress bar

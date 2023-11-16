@@ -62,11 +62,14 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
     private int blockedCarPlateCounter = 1;
     private List<TextInputLayout> blockedCarList;
     private FirebaseFirestore db;
+    private String currentVehiclePlate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slot_selection);
+
+        currentVehiclePlate = getIntent().getStringExtra("currentVehicle");
 
         setReference();
 
@@ -173,6 +176,7 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
                     return;
                 }
 
+                parkLog.put("carPlate", currentVehiclePlate);
                 parkLog.put("matriculationNo", matricNo);
                 parkLog.put("parkType", parkType);
                 parkLog.put("location", locationSpinner.getSelectedItem());
@@ -185,6 +189,7 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
                 parkLog.put("location", locationSpinner.getSelectedItem());
                 parkLog.put("startTime", currentTime);
                 parkLog.put("endTime", endTime);
+                parkLog.put("carPlate", currentVehiclePlate);
             }
 
             // Save the parkLog object into Firestore
@@ -207,7 +212,9 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
                         editor.putString("location", (String) locationSpinner.getSelectedItem());
                         editor.putString("endTime", endTime);
                         editor.putString("startTime", currentTime);
+                        editor.putString("date", currentDate);
                         editor.putString("parkType", parkType);
+                        editor.putString("carPlate", currentVehiclePlate);
                         Log.d(TAG, documentReference.getId());
 
                         editor.apply();

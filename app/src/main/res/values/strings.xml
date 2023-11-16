@@ -130,6 +130,10 @@
     <string name="car_color">Car Color</string>
     <string name="empty_time">--:--</string>
     <string name="car_plate_1">Car Plate 1</string>
+    <string name="extend_time">Extend Time</string>
+    <string name="finish_parking">Finish Parking</string>
+    <string name="not_parked">Not Parked</string>
+    <string name="close">Close</string>
 
 
     <string-array name="location">
