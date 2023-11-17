@@ -395,10 +395,30 @@ public class HomePage extends AppCompatActivity {
 
         });
         parkSelectButton.setOnClickListener( v -> {
-            // TODO: Add validation to check if the user still park or not
-            Intent intent = new Intent(HomePage.this, Slot_Selection.class);
-            intent.putExtra("currentVehicle", currentVehiclePlate);
-            startActivity(intent);
+            SharedPreferences pref = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
+            String status = pref.getString("status", "");
+
+            if (!status.equals("parked")){
+                //  Add validation to check if the user still park or not
+                Intent intent = new Intent(HomePage.this, Slot_Selection.class);
+                intent.putExtra("currentVehicle", currentVehiclePlate);
+                startActivity(intent);
+            } else {
+                Dialog inParkingDialog = new Dialog(this);
+                inParkingDialog.setContentView(R.layout.in_parking_dialog);
+                inParkingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                inParkingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+                inParkingDialog.setCancelable(true);
+
+                MaterialButton closeButton = inParkingDialog.findViewById(R.id.closeButton);
+
+                closeButton.setOnClickListener(view -> {
+                    inParkingDialog.dismiss();
+                });
+
+                inParkingDialog.show();
+            }
+
 
         });
         reportButton.setOnClickListener( v -> {
@@ -494,7 +514,7 @@ public class HomePage extends AppCompatActivity {
             });
 
             exitParkingButton.setOnClickListener(view -> {
-                //TODO: Remove parking from local and update the status on firestore to exited
+                //Remove parking from local and update the status on firestore to exited
                 String documentId = prefs.getString("documentID", "");
                 String date = prefs.getString("date", "");
 

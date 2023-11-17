@@ -134,6 +134,7 @@
     <string name="finish_parking">Finish Parking</string>
     <string name="not_parked">Not Parked</string>
     <string name="close">Close</string>
+    <string name="in_parking">In Parking</string>
 
 
     <string-array name="location">
