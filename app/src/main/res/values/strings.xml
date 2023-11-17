@@ -135,6 +135,8 @@
     <string name="not_parked">Not Parked</string>
     <string name="close">Close</string>
     <string name="in_parking">In Parking</string>
+    <string name="extend_time_slot">Extend Time Slot</string>
+    <string name="no_car_selected">No Car Selected</string>
 
 
     <string-array name="location">

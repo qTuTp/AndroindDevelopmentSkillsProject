@@ -21,7 +21,7 @@
         android:orientation="vertical"
         android:padding="30dp"
         android:id="@+id/rectangle1"
-        android:minWidth="400dp"
+        android:minWidth="300dp"
 >
 
         <TextView

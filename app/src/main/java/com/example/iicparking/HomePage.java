@@ -5,6 +5,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.iicparking.Class.Notification;
@@ -31,9 +33,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
@@ -41,6 +46,7 @@ import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 
 public class HomePage extends AppCompatActivity {
+
     final String TAG = "HOMEPAGE";
 
     private AppCompatButton manageParkButton;
@@ -63,20 +69,19 @@ public class HomePage extends AppCompatActivity {
     private List<Vehicle> userCars;
     private List<String> carPlateList;
     private String currentVehiclePlate;
+    int hour, minute;
 
     //Declare the max vacancy
-    private final int FLOOR1_MAX = 100;
-    private final int BASEMENT1_MAX = 100;
-    private final int BASEMENT2_MAX = 100;
-    private final int GARDEN_MAX = 100;
+    private final int FLOOR1_MAX = 83;
+    private final int BASEMENT1_MAX = 180;
+    private final int BASEMENT2_MAX = 95;
+    private final int GARDEN_MAX = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         setReference();
-
-
 
         fetchUserCarsFromFirestore();
 
@@ -395,29 +400,49 @@ public class HomePage extends AppCompatActivity {
 
         });
         parkSelectButton.setOnClickListener( v -> {
-            SharedPreferences pref = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
-            String status = pref.getString("status", "");
 
-            if (!status.equals("parked")){
-                //  Add validation to check if the user still park or not
-                Intent intent = new Intent(HomePage.this, Slot_Selection.class);
-                intent.putExtra("currentVehicle", currentVehiclePlate);
-                startActivity(intent);
-            } else {
-                Dialog inParkingDialog = new Dialog(this);
-                inParkingDialog.setContentView(R.layout.in_parking_dialog);
-                inParkingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                inParkingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
-                inParkingDialog.setCancelable(true);
+            //TODO: add validation to check if any current vehicle is selected
+            if (currentVehiclePlate != null && !currentVehiclePlate.isEmpty()){
 
-                MaterialButton closeButton = inParkingDialog.findViewById(R.id.closeButton);
+                SharedPreferences pref = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
+                String status = pref.getString("status", "");
+
+                if (!status.equals("parked")){
+                    //  Add validation to check if the user still park or not
+                    Intent intent = new Intent(HomePage.this, Slot_Selection.class);
+                    intent.putExtra("currentVehicle", currentVehiclePlate);
+                    startActivity(intent);
+                } else {
+                    Dialog inParkingDialog = new Dialog(this);
+                    inParkingDialog.setContentView(R.layout.in_parking_dialog);
+                    inParkingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    inParkingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+                    inParkingDialog.setCancelable(true);
+
+                    MaterialButton closeButton = inParkingDialog.findViewById(R.id.closeButton);
+
+                    closeButton.setOnClickListener(view -> {
+                        inParkingDialog.dismiss();
+                    });
+
+                    inParkingDialog.show();
+                }
+            }else{
+                Dialog noCarSelectedDialog = new Dialog(this);
+                noCarSelectedDialog.setContentView(R.layout.no_car_selected_dialog);
+                noCarSelectedDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                noCarSelectedDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+                noCarSelectedDialog.setCancelable(true);
+
+                MaterialButton closeButton = noCarSelectedDialog.findViewById(R.id.closeButton);
 
                 closeButton.setOnClickListener(view -> {
-                    inParkingDialog.dismiss();
+                    noCarSelectedDialog.dismiss();
                 });
 
-                inParkingDialog.show();
+                noCarSelectedDialog.show();
             }
+
 
 
         });
@@ -509,6 +534,7 @@ public class HomePage extends AppCompatActivity {
             MaterialButton exitParkingButton = manageParkDialog.findViewById(R.id.finishParkingButton);
 
             addTimeButton.setOnClickListener(view -> {
+                showExtendTimeDialog();
                 manageParkDialog.dismiss();
 
             });
@@ -561,6 +587,105 @@ public class HomePage extends AppCompatActivity {
 
 
 
+    }
+
+    private int compareTimes(String time1, String time2) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        try {
+            Date date1 = sdf.parse(time1);
+            Date date2 = sdf.parse(time2);
+            return date1.compareTo(date2); // Show error if date 1 earlier than date 2
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // Return 0 for any error
+        }
+    }
+
+    private void showExtendTimeDialog(){
+        Dialog extendParkDialog = new Dialog(this);
+        extendParkDialog.setContentView(R.layout.extend_park_dialog);
+        extendParkDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        extendParkDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        extendParkDialog.setCancelable(true);
+
+        MaterialButton extendTimeButton = extendParkDialog.findViewById(R.id.addTimeButton);
+        MaterialButton cancelButton = extendParkDialog.findViewById(R.id.cancelButton);
+
+        TextInputLayout extendTime = extendParkDialog.findViewById(R.id.extendTime);
+
+        TextView startTime = extendParkDialog.findViewById(R.id.startTime);
+        TextView endTime = extendParkDialog.findViewById(R.id.endTime);
+
+        SharedPreferences pref = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
+        String endTimeStr = pref.getString("endTime", "");
+        String startTimeStr = pref.getString("startTime", "");
+
+        startTime.setText(startTimeStr);
+        endTime.setText(endTimeStr);
+
+        extendTimeButton.setOnClickListener(v -> {
+            extendTime.setError(null);
+            //TODO: Update the endtime to the extend time, also validate the time
+            String extendedTime = extendTime.getEditText().getText().toString().trim();
+            if (!extendedTime.isEmpty()){
+
+
+                if (compareTimes(endTimeStr, extendedTime) > 0){
+                    extendTime.setError("Extended Time should be earlier than end time");
+                }
+
+
+                String documentId = pref.getString("documentID", "");
+                String date = pref.getString("date", "");
+
+                DocumentReference logRef = db.collection("parkLog").document(date).collection("logs").document(documentId);
+
+                logRef.update("endTime", extendedTime).
+                        addOnSuccessListener(documentPreference -> {
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("endTime", extendedTime);
+                            editor.apply();
+                            extendParkDialog.dismiss();
+
+                        }).addOnFailureListener(e -> {
+                            Log.e(TAG, "Error Updating Extended Time", e);
+                            Toast.makeText(this, "Error Updating Extended Time", Toast.LENGTH_SHORT).show();
+                            extendParkDialog.dismiss();
+                        });
+
+            }else{
+                extendTime.setError("Please select a time");
+                return;
+            }
+        });
+
+        cancelButton.setOnClickListener(v -> {
+            extendParkDialog.dismiss();
+        });
+
+        extendTime.getEditText().setOnClickListener(v -> {
+            popTimePicker(extendTime);
+        });
+
+        extendParkDialog.show();
+    }
+
+    public void popTimePicker(TextInputLayout view) {
+
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
+                hour = selectedHour;
+                minute = selectedMinute;
+                view.getEditText().setText(String.format(Locale.getDefault(),"%02d:%02d",hour,minute));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,onTimeSetListener,hour,minute, true);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 
     //Update the corresponding data on the visual of progress bar
