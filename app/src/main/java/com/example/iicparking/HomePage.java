@@ -583,7 +583,7 @@ public class HomePage extends AppCompatActivity {
 //            Intent intent = new Intent(HomePage.this, SearchVehicle.class);
 //            startActivity(intent);
 
-            //TODO: Add dialog for search vehicle
+            //Add dialog for search vehicle
             Dialog searchPlateDialog = new Dialog(this);
             searchPlateDialog.setContentView(R.layout.search_vehicle_dialog);
             searchPlateDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
