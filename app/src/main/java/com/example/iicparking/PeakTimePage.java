@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +36,11 @@ import java.util.Locale;
 import java.util.Map;
 
 public class PeakTimePage extends AppCompatActivity {
+
+    private final String TAG = "PeakTimePage";
+
+    private String selectedDay;
+    private int dateModifier;
 
     private class HourAxisValueFormatter extends ValueFormatter {
 
@@ -74,9 +81,7 @@ public class PeakTimePage extends AppCompatActivity {
         setReference();
         getToday();
         updateDay(0);
-        List<BarEntry> barEntryList = new ArrayList<>();
-        updateChart(barEntryList);
-        db = FirebaseFirestore.getInstance();
+
         fetchDataFromFirestore();
 
 
@@ -88,6 +93,9 @@ public class PeakTimePage extends AppCompatActivity {
         afterDay = findViewById(R.id.afterDay);
         DAYS = getResources().getStringArray(R.array.days_of_week);
         peakTimeChart = findViewById(R.id.peakTimeChart);
+        selectedDay = getDayAWeekAgo();
+        db = FirebaseFirestore.getInstance();
+        dateModifier = 0;
 
 
         //indicator 1 mean prior day is clicked, while 2 indicate after day is clicked
@@ -106,9 +114,22 @@ public class PeakTimePage extends AppCompatActivity {
                 break;
             case 1: //If prior day, move the primary day to the previous day
                 currentDay = (currentDay - 1 + 7) % 7;
+                if (dateModifier == -6)
+                    dateModifier = 0;
+                else
+                    dateModifier--;
+                selectedDay = getDayAWeekAgo();
+                fetchDataFromFirestore();
                 break;
             case 2: //If after day, move the primary day to the day after
                 currentDay = (currentDay + 1 + 7) % 7;
+                if (dateModifier == 6)
+                    dateModifier = 0;
+                else
+                    dateModifier++;
+
+                selectedDay = getDayAWeekAgo();
+                fetchDataFromFirestore();
                 break;
 
         }
@@ -198,9 +219,11 @@ public class PeakTimePage extends AppCompatActivity {
 
     }
 
-    private String getCurrentDate() {
+    private String getDayAWeekAgo() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -7 + dateModifier);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        return dateFormat.format(new Date());
+        return dateFormat.format(calendar.getTime());
     }
 
     //To get the current date
@@ -212,18 +235,14 @@ public class PeakTimePage extends AppCompatActivity {
 
     private void fetchDataFromFirestore() {
         // Get the date of the selected day
-        Calendar calendar = Calendar.getInstance();
-        String selectedDate = String.format(Locale.ENGLISH, "%04d-%02d-%02d",
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH) + 1,
-                calendar.get(Calendar.DAY_OF_MONTH));
 
-        Log.d("SelectedDate", selectedDate);
+
+        Log.d("SelectedDate", selectedDay);
 
         // Fetch data from Firestore
         db.collection("parkLog")
-                .document(selectedDate)
-                .collection("log")
+                .document(selectedDay)
+                .collection("logs")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     Map<Integer, Integer> hourCarCountMap = new HashMap<>();
@@ -231,11 +250,14 @@ public class PeakTimePage extends AppCompatActivity {
                     // Iterate through documents in the "log" subcollection
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         // Get start and end times from the document
-                        long startTime = document.getLong("startTime");
-                        long endTime = document.getLong("endTime");
+                        String startTimeStr = document.getString("startTime");
+                        String endTimeStr = document.getString("endTime");
+
+                        int startTimeHour = Integer.parseInt(startTimeStr.split(":")[0]);
+                        int endTimeHour = Integer.parseInt(endTimeStr.split(":")[0]);
 
                         // Calculate total car count for each hour within the range
-                        for (long hour = startTime; hour <= endTime; hour++) {
+                        for (int hour = startTimeHour; hour <= endTimeHour; hour++) {
                             // Adjust the hour to be between 0 and 23
                             int adjustedHour = (int) (hour % 24);
 
@@ -248,8 +270,10 @@ public class PeakTimePage extends AppCompatActivity {
                     // Convert the map to a list of BarEntry objects
                     List<BarEntry> values = new ArrayList<>();
                     for (Map.Entry<Integer, Integer> entry : hourCarCountMap.entrySet()) {
-                        values.add(new BarEntry(entry.getKey(), entry.getValue()));
+                        values.add(new BarEntry(23 - entry.getKey(), entry.getValue()));
+                        Log.d(TAG,entry.getKey().toString() + entry.getValue().toString() );
                     }
+
 
                     // Update the chart with the calculated values
                     updateChart(values);
@@ -263,6 +287,12 @@ public class PeakTimePage extends AppCompatActivity {
 
         //Update the visual of the chart
     private void updateChart(List<BarEntry> values) {
+
+        if (values.isEmpty()){
+            Toast.makeText(this, "No Data in " + selectedDay, Toast.LENGTH_SHORT).show();
+        }
+
+
         // Assign color for the bar based on value
         List<Integer> colors = new ArrayList<>();
         for (BarEntry entry : values) {
@@ -271,52 +301,43 @@ public class PeakTimePage extends AppCompatActivity {
         Log.d("ChartUpdate", "Updating chart with values: " + values.toString());
         BarDataSet set = new BarDataSet(values, "Number of Cars");
         set.setColors(colors);
+        set.setValueTextSize(12f);
 
         BarData barData = new BarData(set);
         peakTimeChart.setData(barData);
+
 
         peakTimeChart.setHighlightFullBarEnabled(false);
         peakTimeChart.setHighlightPerTapEnabled(false);
         peakTimeChart.setHighlightPerDragEnabled(false);
 
-        // Set up the y-axis
-        YAxis yAxis = peakTimeChart.getAxisLeft();
-        yAxis.setDrawGridLines(true);
-        yAxis.setDrawAxisLine(true);
-        yAxis.setDrawLabels(true);
-        yAxis.setGranularity(1f);
-        yAxis.setGranularityEnabled(true);
 
-        // Set up the x-axis
         XAxis xAxis = peakTimeChart.getXAxis();
+
+        xAxis.setValueFormatter(new HourAxisValueFormatter());
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawAxisLine(true);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
 
-        // Set up the labels for the y-axis
-        final String[] hours = new String[]{"0000", "0100", "0200", "0300", "0400", "0500", "0600", "0700", "0800", "0900", "1000", "1100",
-                "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
+        YAxis leftAxis = peakTimeChart.getAxisLeft();
 
-        yAxis.setValueFormatter(new IndexAxisValueFormatter(hours));
 
-        // Set up the labels for the x-axis
-        xAxis.setValueFormatter(new ValueFormatter() {
-            @Override
-            public String getFormattedValue(float value) {
-                // Ensure the value is a valid index in the 'values' list
-                int index = (int) value;
-                if (index >= 0 && index < values.size()) {
-                    return String.valueOf((int) values.get(index).getY());
-                } else {
-                    return "";
-                }
-            }
-        });
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setDrawAxisLine(false);
+        leftAxis.setDrawLabels(false);
 
         YAxis rightAxis = peakTimeChart.getAxisRight();
-        rightAxis.setEnabled(false); // Disable the right axis
+        rightAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf((int) value);
+            }
+        });
+        rightAxis.setDrawGridLines(false);
+        rightAxis.setDrawAxisLine(false);
+        rightAxis.setDrawLabels(false);
 
         peakTimeChart.getLegend().setEnabled(false);
         peakTimeChart.getDescription().setEnabled(false);
