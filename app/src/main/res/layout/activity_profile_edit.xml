@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_bold"
-            android:text="@string/profileTitle"
+            android:text="@string/editProfileButton"
             android:textColor="@color/INTIRed"
             android:textSize="30sp" />
 
@@ -38,149 +38,91 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/edit_name"
-        style="@style/regularWord"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameInput"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:hint="@string/name"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/edit_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
+        >
 
-    <EditText
-        android:id="@+id/inputName"
-        style="@style/regularWord"
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/nameInput"
+        android:hint="@string/phoneNo"
+        app:boxStrokeColor="@color/INTIRed"
+        app:endIconMode="clear_text"
+        app:hintTextColor="@color/black"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_background"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        app:layout_constraintStart_toStartOf="@id/edit_name"
-        app:layout_constraintTop_toBottomOf="@id/edit_name"
-        app:layout_constraintWidth_percent="0.85" />
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/INTIRed"
+        style="@style/Widget.MaterialComponents.Button"
+        app:layout_constraintTop_toBottomOf="@id/phoneInput"
+        app:layout_constraintStart_toStartOf="@id/phoneInput"
+        app:layout_constraintEnd_toStartOf="@id/discardButton"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintHeight_min="54dp"
+        app:layout_constraintHorizontal_weight="1"
 
-    <TextView
-        android:id="@+id/titleEmail"
-        style="@style/regularWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/edit_email"
-        app:layout_constraintStart_toStartOf="@id/inputName"
-        app:layout_constraintTop_toBottomOf="@id/inputName" />
-
-    <EditText
-        android:id="@+id/inputEmail"
-        style="@style/regularWord"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_background"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        app:layout_constraintStart_toStartOf="@id/titleEmail"
-        app:layout_constraintTop_toBottomOf="@id/titleEmail"
-        app:layout_constraintWidth_percent="0.85" />
-
-    <TextView
-        android:id="@+id/titlePhone"
-        style="@style/regularWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/edit_phone"
-        app:layout_constraintStart_toStartOf="@id/inputEmail"
-        app:layout_constraintTop_toBottomOf="@id/inputEmail" />
-
-    <EditText
-        android:id="@+id/inputPhone"
-        style="@style/regularWord"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_background"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        app:layout_constraintStart_toStartOf="@id/titlePhone"
-        app:layout_constraintTop_toBottomOf="@id/titlePhone"
-        app:layout_constraintWidth_percent="0.85" />
-
-    <TextView
-        android:id="@+id/passwordTitle"
-        style="@style/regularWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/edit_password"
-        app:layout_constraintStart_toStartOf="@id/inputPhone"
-        app:layout_constraintTop_toBottomOf="@id/inputPhone" />
-
-    <EditText
-        android:id="@+id/inputPassword"
-        style="@style/regularWord"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_background"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        app:layout_constraintStart_toStartOf="@id/passwordTitle"
-        app:layout_constraintTop_toBottomOf="@id/passwordTitle"
-        app:layout_constraintWidth_percent="0.85" />
-
-    <TextView
-        android:id="@+id/titleConfirmPassword"
-        style="@style/regularWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/confirmPassword"
-        app:layout_constraintStart_toStartOf="@id/inputPassword"
-        app:layout_constraintTop_toBottomOf="@id/inputPassword"
 
         />
 
-    <EditText
-        android:id="@+id/inputConfirmPassword"
-        style="@style/regularWord"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/discardButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/input_background"
-        android:paddingHorizontal="10sp"
-        android:paddingVertical="5sp"
-        app:layout_constraintStart_toStartOf="@id/titleConfirmPassword"
-        app:layout_constraintTop_toBottomOf="@id/titleConfirmPassword"
-        app:layout_constraintWidth_percent="0.85" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/discardButton"
-        style="@style/buttonTextRed"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/secondary_button_background"
         android:text="@string/discardButton"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toStartOf="@id/editButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputConfirmPassword" />
+        android:textColor="@color/INTIRed"
+        android:backgroundTint="@color/white"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintTop_toBottomOf="@id/phoneInput"
+        app:layout_constraintEnd_toEndOf="@id/phoneInput"
+        app:layout_constraintStart_toEndOf="@id/saveButton"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:strokeColor="@color/INTIRed"
+        app:layout_constraintHeight_min="54dp"
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/editButton"
-        style="@style/buttonTextWhite"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/primary_button_background"
-        android:text="@string/editProfileButton"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/discardButton"
-        app:layout_constraintTop_toTopOf="@id/discardButton" />
+
+
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
