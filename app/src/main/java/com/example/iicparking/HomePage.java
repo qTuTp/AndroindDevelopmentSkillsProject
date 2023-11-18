@@ -430,8 +430,38 @@ public class HomePage extends AppCompatActivity {
             startActivity(intent);
         });
         searchVehicleButton.setOnClickListener( v -> {
-            Intent intent = new Intent(HomePage.this, SearchVehicle.class);
-            startActivity(intent);
+//            Intent intent = new Intent(HomePage.this, SearchVehicle.class);
+//            startActivity(intent);
+
+            //TODO: Add dialog for search vehicle
+            Dialog searchPlateDialog = new Dialog(this);
+            searchPlateDialog.setContentView(R.layout.search_vehicle_dialog);
+            searchPlateDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            searchPlateDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+            searchPlateDialog.setCancelable(true);
+
+            TextInputLayout carPlateNo = searchPlateDialog.findViewById(R.id.carPlateInput);
+
+            MaterialButton confirmButton = searchPlateDialog.findViewById(R.id.confirmButton);
+            MaterialButton cancelButton = searchPlateDialog.findViewById(R.id.cancelButton);
+
+            confirmButton.setOnClickListener(view -> {
+                String carPlateStr = carPlateNo.getEditText().getText().toString().trim();
+                if (!carPlateStr.isEmpty()) {
+                    searchUserWithCarPlate(carPlateStr);
+                    searchPlateDialog.dismiss();
+                } else {
+                    carPlateNo.setError("Car Plate is Required!");
+                }
+            });
+
+
+
+            cancelButton.setOnClickListener(view -> {
+                searchPlateDialog.dismiss();
+            });
+
+            searchPlateDialog.show();
         });
         peakTimeButton.setOnClickListener( v -> {
             Intent intent = new Intent(HomePage.this, PeakTimePage.class);
@@ -480,6 +510,80 @@ public class HomePage extends AppCompatActivity {
 
         });
     }
+
+    private void searchUserWithCarPlate(String carPlate) {
+        Query query = db.collectionGroup("cars").whereEqualTo("carPlateNumber", carPlate);
+
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                boolean userFound = false;
+
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    DocumentReference userRef = document.getReference().getParent().getParent();
+
+                    userRef.get().addOnSuccessListener(userDocument -> {
+                        if (userDocument.exists()) {
+                            // Display user details in a dialog
+                            Dialog searchedUserDialog = new Dialog(this);
+                            searchedUserDialog.setContentView(R.layout.user_detail_dialog);
+                            searchedUserDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            searchedUserDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+                            searchedUserDialog.setCancelable(true);
+
+                            TextView name = searchedUserDialog.findViewById(R.id.displayname);
+                            TextView email = searchedUserDialog.findViewById(R.id.displayemail);
+                            TextView phone = searchedUserDialog.findViewById(R.id.displayphone);
+
+                            MaterialButton confirmButton = searchedUserDialog.findViewById(R.id.confirmButton);
+
+                            String nameStr = userDocument.getString("name");
+                            String emailStr = userDocument.getString("email");
+                            String phoneStr = userDocument.getString("phone");
+
+                            name.setText(nameStr);
+                            email.setText(emailStr);
+                            phone.setText(phoneStr);
+
+                            confirmButton.setOnClickListener(view -> {
+                                searchedUserDialog.dismiss();
+                            });
+
+                            searchedUserDialog.show();
+                        } else {
+                            Toast.makeText(HomePage.this, "User document doesn't exist", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(e -> {
+                        // Handle failure to fetch user document
+                        Toast.makeText(HomePage.this, "Failed to fetch user document: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+
+                    userFound = true;
+                    break;
+                }
+
+                if (!userFound) {
+                    // Display Information Not Found dialog here
+                    Dialog informationNotFoundDialog = new Dialog(this);
+                    informationNotFoundDialog.setContentView(R.layout.information_not_found_dialog);
+                    informationNotFoundDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    informationNotFoundDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+                    informationNotFoundDialog.setCancelable(true);
+
+                    MaterialButton closeButton = informationNotFoundDialog.findViewById(R.id.closeButton);
+                    closeButton.setOnClickListener(view -> {
+                        informationNotFoundDialog.dismiss();
+                    });
+
+                    informationNotFoundDialog.show();
+                }
+            } else {
+                // Handle errors in the query
+                Toast.makeText(HomePage.this, "Query failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, task.getException().getMessage());
+            }
+        });
+    }
+
 
     private void showManageParkDialog(){
         SharedPreferences prefs = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
