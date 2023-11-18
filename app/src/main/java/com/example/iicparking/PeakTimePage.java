@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.iicparking.Class.ParkLog;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -81,10 +83,64 @@ public class PeakTimePage extends AppCompatActivity {
         setReference();
         getToday();
         updateDay(0);
+//        putDummyDataIntoFirestore();
 
         fetchDataFromFirestore();
 
 
+    }
+
+    // Function to set dummy data
+    private void putDummyDataIntoFirestore(){
+        ParkLog parkLog1 = new ParkLog("ABC123", "19:30", "Floor 1", "123456", "Normal Parking", "17:30");
+        ParkLog parkLog2 = new ParkLog("DEF456", "18:45", "Basement -1", "789012", "Normal Parking", "16:00");
+        ParkLog parkLog3 = new ParkLog("GHI789", "20:15", "Garden", "345678", "Normal Parking", "18:30");
+        ParkLog parkLog4 = new ParkLog("JKL012", "23:00", "Basement -2", "901234", "Normal Parking", "15:45");
+        ParkLog parkLog5 = new ParkLog("MNO345", "17:45", "Floor 1", "567890", "Normal Parking", "14:30");
+
+        ParkLog parkLog6 = new ParkLog("PQR678", "18:30", "Garden", "123123", "Normal Parking", "16:15");
+        ParkLog parkLog7 = new ParkLog("STU901", "19:45", "Basement -1", "456456", "Normal Parking", "18:00");
+        ParkLog parkLog8 = new ParkLog("VWX234", "20:30", "Floor 1", "789789", "Normal Parking", "19:00");
+        ParkLog parkLog9 = new ParkLog("YZA567", "18:15", "Basement -2", "012345", "Normal Parking", "16:45");
+        ParkLog parkLog10 = new ParkLog("BCD890", "19:30", "Garden", "678901", "Normal Parking", "17:00");
+
+        ParkLog parkLog11 = new ParkLog("EFG123", "19:15", "Floor 1", "234567", "Normal Parking", "18:00");
+        ParkLog parkLog12 = new ParkLog("HIJ456", "18:45", "Garden", "890123", "Normal Parking", "17:30");
+        ParkLog parkLog13 = new ParkLog("KLM789", "20:00", "Basement -1", "345678", "Normal Parking", "19:15");
+        ParkLog parkLog14 = new ParkLog("NOP012", "19:30", "Floor 1", "901234", "Normal Parking", "18:15");
+        ParkLog parkLog15 = new ParkLog("QRS345", "18:00", "Basement -2", "567890", "Normal Parking", "16:30");
+
+        ParkLog parkLog16 = new ParkLog("TUV678", "20:15", "Garden", "123456", "Normal Parking", "19:00");
+        ParkLog parkLog17 = new ParkLog("WXY901", "19:45", "Basement -1", "789012", "Normal Parking", "18:30");
+        ParkLog parkLog18 = new ParkLog("ZAB234", "18:30", "Floor 1", "345678", "Normal Parking", "17:15");
+        ParkLog parkLog19 = new ParkLog("CDE567", "19:00", "Basement -2", "901234", "Normal Parking", "18:45");
+        ParkLog parkLog20 = new ParkLog("FGH890", "23:30", "Garden", "567890", "Normal Parking", "19:15");
+
+        List<ParkLog> parkLogs = Arrays.asList(
+                parkLog1, parkLog2, parkLog3, parkLog4, parkLog5,
+                parkLog6, parkLog7, parkLog8, parkLog9, parkLog10,
+                parkLog11, parkLog12, parkLog13, parkLog14, parkLog15,
+                parkLog16, parkLog17, parkLog18, parkLog19, parkLog20
+        );
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -6);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        String date = dateFormat.format(calendar.getTime());
+
+        for (ParkLog parkLog : parkLogs) {
+            db.collection("parkLog")
+                    .document(date)
+                    .collection("logs")
+                    .add(parkLog)
+                    .addOnSuccessListener(documentReference -> {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e(TAG, "Error adding document", e);
+                    });
+        }
     }
 
     private void setReference(){
