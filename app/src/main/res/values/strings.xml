@@ -119,12 +119,28 @@
     <string name="cont">Continue</string>
     <string name="backToLogin">Return Back To Login</string>
     <string name="confirm">Confirm</string>
+    <string name="logout">Logout</string>
+    <string name="exit_application">Exit Application</string>
+    <string name="are_you_sure_you_want_to_exit">Are you sure you want to exit?</string>
+    <string name="exit">Exit</string>
+    <string name="edit_vehicle">Edit Vehicle</string>
+    <string name="select_vehicle">Select Vehicle</string>
+    <string name="none">NONE</string>
+    <string name="car_plate_number">Car Plate Number</string>
+    <string name="car_color">Car Color</string>
+    <string name="empty_time">--:--</string>
+    <string name="car_plate_1">Car Plate 1</string>
+    <string name="extend_time">Extend Time</string>
+    <string name="finish_parking">Finish Parking</string>
+    <string name="not_parked">Not Parked</string>
+    <string name="close">Close</string>
+    <string name="in_parking">In Parking</string>
 
 
     <string-array name="location">
-        <item>Level 1</item>
-        <item>Level 2</item>
-        <item>Basement</item>
+        <item>Floor 1</item>
+        <item>Basement -1</item>
+        <item>Basement -2</item>
         <item>Garden</item>
     </string-array>
     <string-array name="days_of_week">
