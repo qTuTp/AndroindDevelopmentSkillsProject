@@ -37,6 +37,13 @@ public class Profile extends AppCompatActivity {
 
         setReference();
 
+        updateData();
+
+
+
+    }
+
+    private void updateData(){
         SharedPreferences prefs = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
         String nameStr = prefs.getString("userName", "");
         String matricNoStr = prefs.getString("matriculationNo", "");
@@ -47,7 +54,12 @@ public class Profile extends AppCompatActivity {
         matriculationNo.setText(matricNoStr);
         phone.setText(phoneStr);
         email.setText(emailStr);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateData();
     }
 
     private void setReference(){
