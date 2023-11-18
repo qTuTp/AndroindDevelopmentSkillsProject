@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class Slot_Selection extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -251,6 +252,8 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
     // Method to get the current time
     private String getCurrentTime() {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        // Set the time zone to the default time zone
+        timeFormat.setTimeZone(TimeZone.getDefault());
         return timeFormat.format(new Date());
     }
 

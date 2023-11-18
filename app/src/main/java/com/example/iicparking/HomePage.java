@@ -5,6 +5,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,9 +19,11 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.iicparking.Class.Notification;
+import com.example.iicparking.Class.ParkLog;
 import com.example.iicparking.Class.Vehicle;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -31,16 +34,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import io.github.douglasjunior.androidSimpleTooltip.SimpleTooltip;
 
 
 
 public class HomePage extends AppCompatActivity {
+
     final String TAG = "HOMEPAGE";
 
     private AppCompatButton manageParkButton;
@@ -63,12 +72,13 @@ public class HomePage extends AppCompatActivity {
     private List<Vehicle> userCars;
     private List<String> carPlateList;
     private String currentVehiclePlate;
+    int hour, minute;
 
     //Declare the max vacancy
-    private final int FLOOR1_MAX = 100;
-    private final int BASEMENT1_MAX = 100;
-    private final int BASEMENT2_MAX = 100;
-    private final int GARDEN_MAX = 100;
+    private final int FLOOR1_MAX = 83;
+    private final int BASEMENT1_MAX = 180;
+    private final int BASEMENT2_MAX = 95;
+    private final int GARDEN_MAX = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,27 +86,147 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         setReference();
 
-
+//        putDummyDataIntoFirestore();
 
         fetchUserCarsFromFirestore();
-
-        int floor1Occupation = 10;
-        int basement1Occupation = 40;
-        int basement2Occupation = 50;
-        int gardenOccupation = 87;
-
-        //Calculate the percentage of the occupation
-        int floor1Percentage = (floor1Occupation*100)/FLOOR1_MAX;
-        int basement1Percentage = (basement1Occupation*100)/BASEMENT1_MAX;
-        int basement2Percentage = (basement2Occupation*100)/BASEMENT2_MAX;
-        int gardenPercentage = (gardenOccupation*100)/GARDEN_MAX;
-
-        updateProgressBar(floor1,floor1Percentage);
-        updateProgressBar(basement1,basement1Percentage);
-        updateProgressBar(basement2,basement2Percentage);
-        updateProgressBar(garden,gardenPercentage);
+        updateParkingVacancy();
 
 
+
+
+    }
+
+    // Function to add dummy data for testing
+    private void putDummyDataIntoFirestore(){
+        String currentDate = getCurrentDate();
+        ParkLog parkLog1 = new ParkLog("ABC123", "19:30", "Floor 1", "123456", "Normal Parking", "17:30");
+        ParkLog parkLog2 = new ParkLog("DEF456", "18:45", "Basement -1", "789012", "Normal Parking", "16:00");
+        ParkLog parkLog3 = new ParkLog("GHI789", "20:15", "Garden", "345678", "Normal Parking", "18:30");
+        ParkLog parkLog4 = new ParkLog("JKL012", "19:00", "Basement -2", "901234", "Normal Parking", "15:45");
+        ParkLog parkLog5 = new ParkLog("MNO345", "17:45", "Floor 1", "567890", "Normal Parking", "14:30");
+
+        ParkLog parkLog6 = new ParkLog("PQR678", "18:30", "Garden", "123123", "Normal Parking", "16:15");
+        ParkLog parkLog7 = new ParkLog("STU901", "19:45", "Basement -1", "456456", "Normal Parking", "18:00");
+        ParkLog parkLog8 = new ParkLog("VWX234", "20:30", "Floor 1", "789789", "Normal Parking", "19:00");
+        ParkLog parkLog9 = new ParkLog("YZA567", "18:15", "Basement -2", "012345", "Normal Parking", "16:45");
+        ParkLog parkLog10 = new ParkLog("BCD890", "19:30", "Garden", "678901", "Normal Parking", "17:00");
+
+        ParkLog parkLog11 = new ParkLog("EFG123", "19:15", "Floor 1", "234567", "Normal Parking", "18:00");
+        ParkLog parkLog12 = new ParkLog("HIJ456", "18:45", "Garden", "890123", "Normal Parking", "17:30");
+        ParkLog parkLog13 = new ParkLog("KLM789", "20:00", "Basement -1", "345678", "Normal Parking", "19:15");
+        ParkLog parkLog14 = new ParkLog("NOP012", "19:30", "Floor 1", "901234", "Normal Parking", "18:15");
+        ParkLog parkLog15 = new ParkLog("QRS345", "18:00", "Basement -2", "567890", "Normal Parking", "16:30");
+
+        ParkLog parkLog16 = new ParkLog("TUV678", "20:15", "Garden", "123456", "Normal Parking", "19:00");
+        ParkLog parkLog17 = new ParkLog("WXY901", "19:45", "Basement -1", "789012", "Normal Parking", "18:30");
+        ParkLog parkLog18 = new ParkLog("ZAB234", "18:30", "Floor 1", "345678", "Normal Parking", "17:15");
+        ParkLog parkLog19 = new ParkLog("CDE567", "19:00", "Basement -2", "901234", "Normal Parking", "18:45");
+        ParkLog parkLog20 = new ParkLog("FGH890", "20:30", "Garden", "567890", "Normal Parking", "19:15");
+
+        List<ParkLog> parkLogs = Arrays.asList(
+                parkLog1, parkLog2, parkLog3, parkLog4, parkLog5,
+                parkLog6, parkLog7, parkLog8, parkLog9, parkLog10,
+                parkLog11, parkLog12, parkLog13, parkLog14, parkLog15,
+                parkLog16, parkLog17, parkLog18, parkLog19, parkLog20
+        );
+
+        for (ParkLog parkLog : parkLogs) {
+            db.collection("parkLog")
+                    .document(currentDate)
+                    .collection("logs")
+                    .add(parkLog)
+                    .addOnSuccessListener(documentReference -> {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    })
+                    .addOnFailureListener(e -> {
+                        Log.e(TAG, "Error adding document", e);
+                    });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateParkingVacancy();
+    }
+
+    private void updateParkingVacancy(){
+        loadingOverlay.setVisibility(View.VISIBLE);
+        loadingIndicator.setVisibility(View.VISIBLE);
+
+        CollectionReference parkLogCollection = db.collection("parkLog");
+        String currentDate = getCurrentDate();
+        String currentTime = getCurrentTime();
+
+        parkLogCollection.document(currentDate)
+                .collection("logs")
+                .whereGreaterThanOrEqualTo("endTime", currentTime)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Initialize a map to store the count for each location
+                        Map<String, Integer> parkedCarsByLocation = new HashMap<>();
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Check if the log has an "exited" status
+                            String status = document.getString("status");
+                            if (status == null || !status.equals("exited")) {
+                                // Car is still parked
+                                String location = document.getString("location");
+                                Log.d(TAG, "Location: " + location + "EndTime: " + document.getString("endTime"));
+
+                                // Update the count for the location
+                                int count = parkedCarsByLocation.getOrDefault(location, 0);
+                                parkedCarsByLocation.put(location, count + 1);
+                            }
+                        }
+
+                        // Now, parkedCarsByLocation contains the count for each location
+                        for (Map.Entry<String, Integer> entry : parkedCarsByLocation.entrySet()) {
+                            String location = entry.getKey();
+                            int count = entry.getValue();
+                            Log.d(TAG, "Location: " + location + " Count: " + count);
+                            // Update the progress bar
+
+                            if(location.equals("Floor 1")){
+                                int floor1Percentage = (count*100)/FLOOR1_MAX;
+                                updateProgressBar(floor1,floor1Percentage);
+                            } else if (location.equals("Basement -1")) {
+                                int basement1Percentage = (count*100)/BASEMENT1_MAX;
+                                updateProgressBar(basement1,basement1Percentage);
+                            } else if (location.equals("Basement -2")){
+                                int basement2Percentage = (count*100)/BASEMENT2_MAX;
+                                updateProgressBar(basement2,basement2Percentage);
+                            } else if (location.equals("Garden")) {
+                                int gardenPercentage = (count*100)/GARDEN_MAX;
+                                updateProgressBar(garden,gardenPercentage);
+                            }
+
+                        }
+
+                        loadingOverlay.setVisibility(View.GONE);
+                        loadingIndicator.setVisibility(View.GONE);
+                    } else {
+                        // Handle errors
+                        Exception exception = task.getException();
+                        if (exception != null) {
+                            // Handle the exception\
+                            Log.e(TAG, exception.getMessage().toString());
+                        }
+                        loadingOverlay.setVisibility(View.GONE);
+                        loadingIndicator.setVisibility(View.GONE);
+                    }
+                });
+    }
+
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return dateFormat.format(new Date());
+    }
+
+    private String getCurrentTime() {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        return timeFormat.format(new Date());
     }
 
     private void showEditVehicleDialog(Vehicle vehicle){
@@ -395,29 +525,49 @@ public class HomePage extends AppCompatActivity {
 
         });
         parkSelectButton.setOnClickListener( v -> {
-            SharedPreferences pref = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
-            String status = pref.getString("status", "");
 
-            if (!status.equals("parked")){
-                //  Add validation to check if the user still park or not
-                Intent intent = new Intent(HomePage.this, Slot_Selection.class);
-                intent.putExtra("currentVehicle", currentVehiclePlate);
-                startActivity(intent);
-            } else {
-                Dialog inParkingDialog = new Dialog(this);
-                inParkingDialog.setContentView(R.layout.in_parking_dialog);
-                inParkingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                inParkingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
-                inParkingDialog.setCancelable(true);
+            //TODO: add validation to check if any current vehicle is selected
+            if (currentVehiclePlate != null && !currentVehiclePlate.isEmpty()){
 
-                MaterialButton closeButton = inParkingDialog.findViewById(R.id.closeButton);
+                SharedPreferences pref = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
+                String status = pref.getString("status", "");
+
+                if (!status.equals("parked")){
+                    //  Add validation to check if the user still park or not
+                    Intent intent = new Intent(HomePage.this, Slot_Selection.class);
+                    intent.putExtra("currentVehicle", currentVehiclePlate);
+                    startActivity(intent);
+                } else {
+                    Dialog inParkingDialog = new Dialog(this);
+                    inParkingDialog.setContentView(R.layout.in_parking_dialog);
+                    inParkingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    inParkingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+                    inParkingDialog.setCancelable(true);
+
+                    MaterialButton closeButton = inParkingDialog.findViewById(R.id.closeButton);
+
+                    closeButton.setOnClickListener(view -> {
+                        inParkingDialog.dismiss();
+                    });
+
+                    inParkingDialog.show();
+                }
+            }else{
+                Dialog noCarSelectedDialog = new Dialog(this);
+                noCarSelectedDialog.setContentView(R.layout.no_car_selected_dialog);
+                noCarSelectedDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                noCarSelectedDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+                noCarSelectedDialog.setCancelable(true);
+
+                MaterialButton closeButton = noCarSelectedDialog.findViewById(R.id.closeButton);
 
                 closeButton.setOnClickListener(view -> {
-                    inParkingDialog.dismiss();
+                    noCarSelectedDialog.dismiss();
                 });
 
-                inParkingDialog.show();
+                noCarSelectedDialog.show();
             }
+
 
 
         });
@@ -613,6 +763,7 @@ public class HomePage extends AppCompatActivity {
             MaterialButton exitParkingButton = manageParkDialog.findViewById(R.id.finishParkingButton);
 
             addTimeButton.setOnClickListener(view -> {
+                showExtendTimeDialog();
                 manageParkDialog.dismiss();
 
             });
@@ -665,6 +816,106 @@ public class HomePage extends AppCompatActivity {
 
 
 
+    }
+
+    private int compareTimes(String time1, String time2) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        try {
+            Date date1 = sdf.parse(time1);
+            Date date2 = sdf.parse(time2);
+            return date1.compareTo(date2); // Show error if date 1 earlier than date 2
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // Return 0 for any error
+        }
+    }
+
+    private void showExtendTimeDialog(){
+        Dialog extendParkDialog = new Dialog(this);
+        extendParkDialog.setContentView(R.layout.extend_park_dialog);
+        extendParkDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        extendParkDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        extendParkDialog.setCancelable(true);
+
+        MaterialButton extendTimeButton = extendParkDialog.findViewById(R.id.addTimeButton);
+        MaterialButton cancelButton = extendParkDialog.findViewById(R.id.cancelButton);
+
+        TextInputLayout extendTime = extendParkDialog.findViewById(R.id.extendTime);
+
+        TextView startTime = extendParkDialog.findViewById(R.id.startTime);
+        TextView endTime = extendParkDialog.findViewById(R.id.endTime);
+
+        SharedPreferences pref = getSharedPreferences("ParkPrefs", Context.MODE_PRIVATE);
+        String endTimeStr = pref.getString("endTime", "");
+        String startTimeStr = pref.getString("startTime", "");
+
+        startTime.setText(startTimeStr);
+        endTime.setText(endTimeStr);
+
+        extendTimeButton.setOnClickListener(v -> {
+            extendTime.setError(null);
+            //Update the endtime to the extend time, also validate the time
+            String extendedTime = extendTime.getEditText().getText().toString().trim();
+            if (!extendedTime.isEmpty() && !extendedTime.equals("--:--")){
+
+
+                if (compareTimes(endTimeStr, extendedTime) > 0){
+                    extendTime.setError("Extended Time should be earlier than end time");
+                    return;
+                }
+
+
+                String documentId = pref.getString("documentID", "");
+                String date = pref.getString("date", "");
+
+                DocumentReference logRef = db.collection("parkLog").document(date).collection("logs").document(documentId);
+
+                logRef.update("endTime", extendedTime).
+                        addOnSuccessListener(documentPreference -> {
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("endTime", extendedTime);
+                            editor.apply();
+                            extendParkDialog.dismiss();
+
+                        }).addOnFailureListener(e -> {
+                            Log.e(TAG, "Error Updating Extended Time", e);
+                            Toast.makeText(this, "Error Updating Extended Time", Toast.LENGTH_SHORT).show();
+                            extendParkDialog.dismiss();
+                        });
+
+            }else{
+                extendTime.setError("Please select a time");
+                return;
+            }
+        });
+
+        cancelButton.setOnClickListener(v -> {
+            extendParkDialog.dismiss();
+        });
+
+        extendTime.getEditText().setOnClickListener(v -> {
+            popTimePicker(extendTime);
+        });
+
+        extendParkDialog.show();
+    }
+
+    public void popTimePicker(TextInputLayout view) {
+
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
+                hour = selectedHour;
+                minute = selectedMinute;
+                view.getEditText().setText(String.format(Locale.getDefault(),"%02d:%02d",hour,minute));
+            }
+        };
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,onTimeSetListener,hour,minute, true);
+
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 
     //Update the corresponding data on the visual of progress bar
