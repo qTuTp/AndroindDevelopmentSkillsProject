@@ -1,14 +1,14 @@
 package com.example.iicparking;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -16,14 +16,22 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class PeakTimePage extends AppCompatActivity {
 
@@ -41,6 +49,8 @@ public class PeakTimePage extends AppCompatActivity {
     private TextView priorDay;
     private TextView afterDay;
     private HorizontalBarChart peakTimeChart;
+    private FirebaseFirestore db;
+    private static final String COLLECTION_NAME = "parkLog";
 
     private int currentDay;
     private String[] DAYS;
@@ -64,7 +74,11 @@ public class PeakTimePage extends AppCompatActivity {
         setReference();
         getToday();
         updateDay(0);
-        updateChart();
+        List<BarEntry> barEntryList = new ArrayList<>();
+        updateChart(barEntryList);
+        db = FirebaseFirestore.getInstance();
+        fetchDataFromFirestore();
+
 
     }
 
@@ -184,36 +198,77 @@ public class PeakTimePage extends AppCompatActivity {
 
     }
 
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return dateFormat.format(new Date());
+    }
+
     //To get the current date
     private void getToday(){
         Calendar calendar = Calendar.getInstance();
         currentDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
 
-
     }
 
-    //Update the visual of the chart
-    private void updateChart(){
-        List<BarEntry> values = new ArrayList<>();
+    private void fetchDataFromFirestore() {
+        // Get the date of the selected day
+        Calendar calendar = Calendar.getInstance();
+        String selectedDate = String.format(Locale.ENGLISH, "%04d-%02d-%02d",
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH) + 1,
+                calendar.get(Calendar.DAY_OF_MONTH));
+
+        Log.d("SelectedDate", selectedDate);
+
+        // Fetch data from Firestore
+        db.collection("parkLog")
+                .document(selectedDate)
+                .collection("log")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    Map<Integer, Integer> hourCarCountMap = new HashMap<>();
+
+                    // Iterate through documents in the "log" subcollection
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        // Get start and end times from the document
+                        long startTime = document.getLong("startTime");
+                        long endTime = document.getLong("endTime");
+
+                        // Calculate total car count for each hour within the range
+                        for (long hour = startTime; hour <= endTime; hour++) {
+                            // Adjust the hour to be between 0 and 23
+                            int adjustedHour = (int) (hour % 24);
+
+                            // Increment car count for the hour in the map
+                            hourCarCountMap.put(adjustedHour, hourCarCountMap.getOrDefault(adjustedHour, 0) + 1);
+                        }
+                        Log.d("FirestoreData", "Data: " + queryDocumentSnapshots.toString());
+                    }
+
+                    // Convert the map to a list of BarEntry objects
+                    List<BarEntry> values = new ArrayList<>();
+                    for (Map.Entry<Integer, Integer> entry : hourCarCountMap.entrySet()) {
+                        values.add(new BarEntry(entry.getKey(), entry.getValue()));
+                    }
+
+                    // Update the chart with the calculated values
+                    updateChart(values);
+                })
+                .addOnFailureListener(e -> {
+                    // Handle errors
+                    Log.e("FirestoreError", "Error fetching data", e);
+                });
+    }
 
 
-        // Suppose you're collecting data every hour over 24 hours.
-        // The reason of start from 23 and decrementing is because otherwise the graph will show top as 2300 and bottom as 0000
-        // For now, view the hour as the actual time, eg. 23 is 2300h. Ignore the 23 - hour as when i think my kepala also sakit, i use this just for
-        // Easier visualize of time only, if i use start from 0 then we may get confuse because the 0000h time maybe contain the data of 2300h
-        for (int hour = 23; hour >= 0; hour--) {
-            float randomCarsCount = (float) (Math.random() * 500); // Random number of cars
-            values.add(new BarEntry(23 - hour, randomCarsCount));
-        }
-
-
-
-        //Assign color for the bar based on value
+        //Update the visual of the chart
+    private void updateChart(List<BarEntry> values) {
+        // Assign color for the bar based on value
         List<Integer> colors = new ArrayList<>();
         for (BarEntry entry : values) {
             colors.add(getColorForEntry(entry));
         }
-
+        Log.d("ChartUpdate", "Updating chart with values: " + values.toString());
         BarDataSet set = new BarDataSet(values, "Number of Cars");
         set.setColors(colors);
 
@@ -224,33 +279,51 @@ public class PeakTimePage extends AppCompatActivity {
         peakTimeChart.setHighlightPerTapEnabled(false);
         peakTimeChart.setHighlightPerDragEnabled(false);
 
+        // Set up the y-axis
+        YAxis yAxis = peakTimeChart.getAxisLeft();
+        yAxis.setDrawGridLines(true);
+        yAxis.setDrawAxisLine(true);
+        yAxis.setDrawLabels(true);
+        yAxis.setGranularity(1f);
+        yAxis.setGranularityEnabled(true);
 
+        // Set up the x-axis
         XAxis xAxis = peakTimeChart.getXAxis();
-        xAxis.setValueFormatter(new HourAxisValueFormatter());
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawAxisLine(true);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
 
-        YAxis leftAxis = peakTimeChart.getAxisLeft();
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setDrawAxisLine(false);
-        leftAxis.setDrawLabels(false);
+        // Set up the labels for the y-axis
+        final String[] hours = new String[]{"0000", "0100", "0200", "0300", "0400", "0500", "0600", "0700", "0800", "0900", "1000", "1100",
+                "1200", "1300", "1400", "1500", "1600", "1700", "1800", "1900", "2000", "2100", "2200", "2300"};
+
+        yAxis.setValueFormatter(new IndexAxisValueFormatter(hours));
+
+        // Set up the labels for the x-axis
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                // Ensure the value is a valid index in the 'values' list
+                int index = (int) value;
+                if (index >= 0 && index < values.size()) {
+                    return String.valueOf((int) values.get(index).getY());
+                } else {
+                    return "";
+                }
+            }
+        });
 
         YAxis rightAxis = peakTimeChart.getAxisRight();
-        rightAxis.setDrawGridLines(false);
-        rightAxis.setDrawAxisLine(false);
-        rightAxis.setDrawLabels(false);
+        rightAxis.setEnabled(false); // Disable the right axis
 
         peakTimeChart.getLegend().setEnabled(false);
-
         peakTimeChart.getDescription().setEnabled(false);
 
         peakTimeChart.invalidate();
-
-
     }
+
 
     private int getColorForEntry(BarEntry entry) {
 
@@ -258,9 +331,9 @@ public class PeakTimePage extends AppCompatActivity {
         int mediumColor = ContextCompat.getColor(this, R.color.progressMedium);
         int lowColor = ContextCompat.getColor(this, R.color.progressLight);
 
-        if (entry.getY() > 400) {
+        if (entry.getY() > 100) {
             return highColor;
-        } else if (entry.getY() > 250) {
+        } else if (entry.getY() > 50) {
             return mediumColor;
         } else {
             return lowColor;
