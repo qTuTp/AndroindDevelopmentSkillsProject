@@ -153,10 +153,11 @@
         <item>Saturday</item>
     </string-array>
     <string-array name="title_issue">
-        <item>Issue 1</item>
-        <item>Issue 2</item>
-        <item>Issue 3</item>
-        <item>Issue 4</item>
+        <item>Parking Issue</item>
+        <item>Security Issue</item>
+        <item>Facility Maintenance</item>
+        <item>Others</item>
     </string-array>
+
 
 </resources>
