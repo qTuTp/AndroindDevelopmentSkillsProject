@@ -57,7 +57,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(notificationChannel);
         }
         notificationManager.notify(0,builder.build());
-
     }
 }
 

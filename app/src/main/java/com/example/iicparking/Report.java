@@ -58,6 +58,7 @@ public class Report extends AppCompatActivity implements AdapterView.OnItemSelec
                         .addOnSuccessListener(documentReference -> {
                             Toast.makeText(Report.this, "Data submitted successfully", Toast.LENGTH_SHORT).show();
                             inputDescription.setText(""); // Clear input after submission if needed
+                            finish();
                         })
                         .addOnFailureListener(e -> {
                             Toast.makeText(Report.this, "Failed to submit data", Toast.LENGTH_SHORT).show();

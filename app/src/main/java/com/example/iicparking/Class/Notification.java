@@ -3,23 +3,29 @@ package com.example.iicparking.Class;
 import java.util.Date;
 
 public class Notification {
-    private String title;
+
+    private String matricNo;
+    private String blockCarPlate;
+    private String phone;
     private String date;
-    private String description;
+    private String time;
+    private String notifType;
 
-    //Constructor
-    public Notification(String title, String date, String desc){
-        this.title = title;
+    public Notification(String matricNo, String blockCarPlate, String phone, String date, String time, String notifType) {
+        this.matricNo = matricNo;
+        this.blockCarPlate = blockCarPlate;
+        this.phone = phone;
         this.date = date;
-        this.description = desc;
+        this.time = time;
+        this.notifType = notifType;
     }
 
-    public String getTitle() {
-        return title;
+    public String getNotifType() {
+        return notifType;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setNotifType(String notifType) {
+        this.notifType = notifType;
     }
 
     public String getDate() {
@@ -30,11 +36,35 @@ public class Notification {
         this.date = date;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTime() {
+        return time;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getMatricNo() {
+        return matricNo;
+    }
+
+    public void setMatricNo(String matricNo) {
+        this.matricNo = matricNo;
+    }
+
+    public String getBlockCarPlate() {
+        return blockCarPlate;
+    }
+
+    public void setBlockCarPlate(String blockCarPlate) {
+        this.blockCarPlate = blockCarPlate;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

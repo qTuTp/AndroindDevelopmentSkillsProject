@@ -59,7 +59,6 @@ import java.util.TimeZone;
 public class Slot_Selection extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private RequestQueue requestQueue;
-
     private static final String TAG = "SLOTSELECTION";
     Button timeButton, endTime_button;
     int hour, minute;
@@ -326,11 +325,9 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
             if (task.isSuccessful()) {
 
 
-
                 //Add Notificatiion to user
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     DocumentReference userRef = document.getReference().getParent().getParent();
-
 
                     //Send push notification to user
                     // Retrieve FCM token from the user document
@@ -352,9 +349,6 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
                         }
                     });
 
-
-
-
                     String notifType = "doubleParkAlert";
 
                     // Save user information
@@ -363,6 +357,8 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
                     notifMap.put("phone", phone);
                     notifMap.put("blockCarPlate", blockCarPlate);
                     notifMap.put("notifType", notifType);
+                    notifMap.put("date", getCurrentDate());
+                    notifMap.put("time", getCurrentTime());
 
                     userRef.collection("notifications").add(notifMap)
                             .addOnSuccessListener(documentReference -> {
@@ -377,8 +373,6 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
 
                     break;
                 }
-
-
             } else {
                 // Handle errors in the query
                 Toast.makeText(Slot_Selection.this, "Query failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

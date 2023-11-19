@@ -30,14 +30,12 @@ public class Noti_RecyclerAdapter extends RecyclerView.Adapter<Noti_RecyclerAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView date;
-        public TextView description;
         public ConstraintLayout card;
 
         public ViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
             date = view.findViewById(R.id.dateTextView);
-            description = view.findViewById(R.id.description);
             card = view.findViewById(R.id.notifCard);
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -67,8 +65,14 @@ public class Noti_RecyclerAdapter extends RecyclerView.Adapter<Noti_RecyclerAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Notification item = itemList.get(position);
-        holder.title.setText(item.getTitle());
-        holder.date.setText(item.getDate());
+        if (item.getNotifType().equals("doubleParkAlert")){
+            holder.title.setText("Double Park Alert");
+        } else if (item.getNotifType().equals("relocateAlert")){
+            holder.title.setText("Relocate Alert");
+        }
+
+        String dateTime = item.getDate() + " " + item.getTime();
+        holder.date.setText(dateTime);
     }
 
     // Return the number of items in the data set.

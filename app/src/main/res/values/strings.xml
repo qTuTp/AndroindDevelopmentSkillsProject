@@ -49,13 +49,14 @@
     <string name="searchButton">Search</string>
     <string name="alertTitle">Double Park Alert</string>
     <string name="carPlate">ABC 4567</string>
-    <string name="idTitle">ID:</string>
+    <string name="idTitle">Matriculation No:</string>
+    <string name="blockCarPlate">Block Car Plate:</string>
+    <string name="blockCarPlateValue">ABC 1234</string>
     <string name="idValue">P21013393</string>
-    <string name="phoneTitle">Phone No:</string>
+    <string name="phoneTitle">Phone:</string>
     <string name="phoneValue">016-XXXXXXX</string>
-    <string name="timeSlotTitle">Time Slot:</string>
+    <string name="timeTitle">Time:</string>
     <string name="timeSlotStartTime">1300</string>
-    <string name="timeSlotEndTime">1400</string>
     <string name="locationTitle">Location:</string>
     <string name="locationValue">Basement</string>
     <string name="alertLeftButton">Notify User</string>
@@ -91,7 +92,7 @@
     <string name="slotSelect">Slot Selection</string>
     <string name="yourVehicle">Your Vehicle</string>
     <string name="addNew_vehicle"> + Add New Vehicle</string>
-    <string name="currentCarPlate"> Current Car Plate :</string>
+    <string name="currentCarPlate"> Double Parker Details:</string>
     <string name="carColor"> Current Car Color :</string>
     <string name="cPlate"> Car Plate :</string>
     <string name="cColor"> Car Color :</string>
