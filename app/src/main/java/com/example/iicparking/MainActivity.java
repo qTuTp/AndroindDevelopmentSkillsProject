@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SharedPreferences pref = getSharedPreferences("UserPreference", Context.MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
 
         if (pref.getString("status","").equals("login")){
             Intent intent = new Intent(MainActivity.this, HomePage.class);

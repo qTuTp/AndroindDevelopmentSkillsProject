@@ -64,6 +64,7 @@
         app:layout_constraintTop_toBottomOf="@id/priorDay"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="10dp"
+        android:paddingHorizontal="5dp"
         />
 
 
