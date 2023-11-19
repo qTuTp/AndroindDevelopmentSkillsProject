@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,14 +25,28 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +57,8 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class Slot_Selection extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    private RequestQueue requestQueue;
 
     private static final String TAG = "SLOTSELECTION";
     Button timeButton, endTime_button;
@@ -64,6 +81,9 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
     private List<TextInputLayout> blockedCarList;
     private FirebaseFirestore db;
     private String currentVehiclePlate;
+    private static final String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    private static final String SERVER_KEY = "key=AAAA74mibkg:APA91bEyq5wGVPe4N6mMrVrKJ_yakqcNNlzand4EiHNL4I5RPXm_aTWLiklOcgzwBVmKnYo_NFbQ5rg8iH5oxB8JlvKAMCYAAwcJt_HyNXzX4vciIlVPQ1bmkqLdxsG70Shgw8b3kcL-";
+    private static final String CONTENT_TYPE = "application/json";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +97,7 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
     }
 
     private void setReference (){
+        requestQueue = Volley.newRequestQueue(this);
         db = FirebaseFirestore.getInstance();
 
         locationSpinner = findViewById(R.id.spinner_1);
@@ -142,6 +163,8 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
     private void validateAndSave(){
         SharedPreferences pref = getSharedPreferences("UserDataPrefs", Context.MODE_PRIVATE);
         String matricNo = pref.getString("matriculationNo","");
+        String phone = pref.getString("phone","");
+
 
         this.endTime.setError(null);
         this.blockedCarInput1.setError(null);
@@ -175,6 +198,14 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
                 if (blockedCarPlate.isEmpty()) {
                     blockedCarInput1.setError("At least 1 Car Plate is Required");
                     return;
+                }
+
+                //TODO: Add notification to user
+
+                for (String plate: blockedCarPlate){
+                    searchUserWithCarPlate(plate, matricNo, phone, currentVehiclePlate);
+
+
                 }
 
                 parkLog.put("carPlate", currentVehiclePlate);
@@ -230,6 +261,130 @@ public class Slot_Selection extends AppCompatActivity implements AdapterView.OnI
                         Toast.makeText(this, "Park Failed", Toast.LENGTH_SHORT);
                     });
         }
+    }
+
+    private void sendPushNotification(String userFCMToken, String title, String message) {
+        String FCM_API = "https://fcm.googleapis.com/fcm/send";
+        String serverKey = "key=AAAA74mibkg:APA91bEyq5wGVPe4N6mMrVrKJ_yakqcNNlzand4EiHNL4I5RPXm_aTWLiklOcgzwBVmKnYo_NFbQ5rg8iH5oxB8JlvKAMCYAAwcJt_HyNXzX4vciIlVPQ1bmkqLdxsG70Shgw8b3kcL-";  // Replace with your actual server key
+        String contentType = "application/json";
+
+        JSONObject notificationBody = createNotificationPayload(userFCMToken, title, message);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, FCM_API, notificationBody,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("TAG", "onResponse: " + response);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Slot_Selection.this, "Request error", Toast.LENGTH_LONG).show();
+                        Log.i("TAG", "onErrorResponse: " + error.getMessage(), error);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", serverKey);
+                params.put("Content-Type", contentType);
+                return params;
+            }
+        };
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private JSONObject createNotificationPayload(String userFCMToken, String title, String message) {
+        JSONObject notification = new JSONObject();
+        JSONObject data = new JSONObject();
+
+        try {
+            data.put("title", title);
+            data.put("body", message);
+
+            Log.d("TAG", userFCMToken);
+
+            notification.put("to", userFCMToken);
+            notification.put("notification", data);
+
+            return notification;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+    private void searchUserWithCarPlate(String carPlate, String matricNo, String phone, String blockCarPlate) {
+        Query query = db.collectionGroup("cars").whereEqualTo("carPlateNumber", carPlate);
+
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+
+
+
+                //Add Notificatiion to user
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    DocumentReference userRef = document.getReference().getParent().getParent();
+
+
+                    //Send push notification to user
+                    // Retrieve FCM token from the user document
+                    userRef.get().addOnCompleteListener(userTask -> {
+                        if (userTask.isSuccessful()) {
+                            DocumentSnapshot userDocument = userTask.getResult();
+                            if (userDocument.exists()) {
+                                String userFCMToken = userDocument.getString("fcmToken");
+                                if (userFCMToken != null && !userFCMToken.isEmpty()) {
+                                    // Send push notification to the user
+                                    sendPushNotification(userFCMToken, "Double Park Alert", "Your car is being block by another user.");
+
+                                }
+                            }
+                        } else {
+                            // Handle errors in retrieving user document
+                            Toast.makeText(Slot_Selection.this, "Failed to retrieve user document: " + userTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, userTask.getException().getMessage());
+                        }
+                    });
+
+
+
+
+                    String notifType = "doubleParkAlert";
+
+                    // Save user information
+                    Map<String, Object> notifMap = new HashMap<>();
+                    notifMap.put("matricNo", matricNo);
+                    notifMap.put("phone", phone);
+                    notifMap.put("blockCarPlate", blockCarPlate);
+                    notifMap.put("notifType", notifType);
+
+                    userRef.collection("notifications").add(notifMap)
+                            .addOnSuccessListener(documentReference -> {
+                                // Notification successfully added
+                                // You can perform any additional actions here if needed
+                            })
+                            .addOnFailureListener(e -> {
+                                // Handle errors in adding notification
+                                Toast.makeText(Slot_Selection.this, "Failed to add notification: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                Log.d(TAG, e.getMessage());
+                            });
+
+                    break;
+                }
+
+
+            } else {
+                // Handle errors in the query
+                Toast.makeText(Slot_Selection.this, "Query failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, task.getException().getMessage());
+            }
+        });
     }
 
     private int compareTimes(String time1, String time2) {

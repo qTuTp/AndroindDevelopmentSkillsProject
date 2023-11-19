@@ -69,7 +69,6 @@ public class Noti_RecyclerAdapter extends RecyclerView.Adapter<Noti_RecyclerAdap
         Notification item = itemList.get(position);
         holder.title.setText(item.getTitle());
         holder.date.setText(item.getDate());
-        holder.description.setText(item.getDescription());
     }
 
     // Return the number of items in the data set.
