@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AlertPopUp">
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
+    android:minWidth="300dp"
+    android:backgroundTint="@color/white"
+
+    >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/input_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingBottom="30dp"
+        android:paddingTop="30dp"
+        android:paddingHorizontal="10dp"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/close"
-            android:layout_gravity="right"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -85,9 +83,33 @@
                     android:fontFamily="@font/inter_bold"/>
 
                 <TextView
+                    android:id="@+id/alert_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/idValue"
+                    android:textSize="20dp"
+                    android:textColor="@color/INTIRed"
+                    android:layout_marginStart="10dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/blockCarPlate"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/inter_bold"/>
+
+                <TextView
+                    android:id="@+id/alert_blockCarPlate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/blockCarPlateValue"
                     android:textSize="20dp"
                     android:textColor="@color/INTIRed"
                     android:layout_marginStart="10dp"/>
@@ -107,6 +129,7 @@
                     android:fontFamily="@font/inter_bold"/>
 
                 <TextView
+                    android:id="@+id/alert_phoneNo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/phoneValue"
@@ -124,29 +147,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/timeSlotTitle"
+                    android:text="@string/timeTitle"
                     android:textSize="20dp"
                     android:fontFamily="@font/inter_bold"/>
 
                 <TextView
+                    android:id="@+id/alert_Time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:text="@string/timeSlotStartTime"
-                    android:textSize="20dp"
-                    android:textColor="@color/INTIRed"
-                    android:layout_marginStart="10dp"/>
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/profile_back_red"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/timeSlotEndTime"
                     android:textSize="20dp"
                     android:textColor="@color/INTIRed"/>
 
@@ -155,24 +165,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/locationTitle"
-                    android:textSize="20dp"
-                    android:fontFamily="@font/inter_bold"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/locationValue"
-                    android:textSize="20dp"
-                    android:textColor="@color/INTIRed"
-                    android:layout_marginStart="10dp"/>
-
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
         </LinearLayout>
 
@@ -184,6 +177,7 @@
             android:layout_marginTop="30dp">
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/alert_notifyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/alertLeftButton"
@@ -193,16 +187,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/alertRightButton"
-                android:textColor="@color/white"
-                android:fontFamily="@font/inter_bold"
-                android:background="@drawable/primary_button_background"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:layout_marginStart="40dp"/>
+
         </LinearLayout>
 
 
@@ -214,4 +199,4 @@
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

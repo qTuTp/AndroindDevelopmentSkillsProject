@@ -15,44 +15,40 @@ import com.example.iicparking.Class.Notification;
 import java.util.List;
 
 public class Noti_RecyclerAdapter extends RecyclerView.Adapter<Noti_RecyclerAdapter.ViewHolder> {
-
+    private final RecyclerViewInterface recyclerViewInterface;
     private List<Notification> itemList;
     private Context context;
-    private OnItemClickListener onItemClickListener; // Interface for item click callbacks
 
     // Constructor to initialize the adapter with a list of items and a context.
-    public Noti_RecyclerAdapter(Context context, List<Notification> itemList) {
+    public Noti_RecyclerAdapter(Context context, List<Notification> itemList, RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.itemList = itemList;
-    }
-
-    // Define an interface to handle item click events
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-    // Setter method for the click listener
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     // ViewHolder class to hold references to your item's views.
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView date;
-        public TextView description;
         public ConstraintLayout card;
 
         public ViewHolder(View view) {
             super(view);
             title = view.findViewById(R.id.title);
             date = view.findViewById(R.id.dateTextView);
-            description = view.findViewById(R.id.description);
             card = view.findViewById(R.id.notifCard);
 
-            // Set an item click listener
-            card.setOnClickListener(v -> {
-                //Open notification detail popup
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (recyclerViewInterface != null){
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
             });
         }
     }
@@ -69,9 +65,14 @@ public class Noti_RecyclerAdapter extends RecyclerView.Adapter<Noti_RecyclerAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Notification item = itemList.get(position);
-        holder.title.setText(item.getTitle());
-        holder.date.setText(item.getDate());
-        holder.description.setText(item.getDescription());
+        if (item.getNotifType().equals("doubleParkAlert")){
+            holder.title.setText("Double Park Alert");
+        } else if (item.getNotifType().equals("relocateAlert")){
+            holder.title.setText("Relocate Alert");
+        }
+
+        String dateTime = item.getDate() + " " + item.getTime();
+        holder.date.setText(dateTime);
     }
 
     // Return the number of items in the data set.

@@ -151,7 +151,31 @@ public class PeakTimePage extends AppCompatActivity {
         peakTimeChart = findViewById(R.id.peakTimeChart);
         selectedDay = getDayAWeekAgo();
         db = FirebaseFirestore.getInstance();
-        dateModifier = 0;
+        // Set the initial value of dateModifier based on the current day
+
+        switch (currentDay) {
+            case Calendar.SUNDAY:
+                dateModifier = 0;
+                break;
+            case Calendar.MONDAY:
+                dateModifier = 1;
+                break;
+            case Calendar.TUESDAY:
+                dateModifier = 2;
+                break;
+            case Calendar.WEDNESDAY:
+                dateModifier = 3;
+                break;
+            case Calendar.THURSDAY:
+                dateModifier = 4;
+                break;
+            case Calendar.FRIDAY:
+                dateModifier = 5;
+                break;
+            case Calendar.SATURDAY:
+                dateModifier = 6;
+                break;
+        }
 
 
         //indicator 1 mean prior day is clicked, while 2 indicate after day is clicked
@@ -170,8 +194,8 @@ public class PeakTimePage extends AppCompatActivity {
                 break;
             case 1: //If prior day, move the primary day to the previous day
                 currentDay = (currentDay - 1 + 7) % 7;
-                if (dateModifier == -6)
-                    dateModifier = 0;
+                if (dateModifier == 0)
+                    dateModifier = 6;
                 else
                     dateModifier--;
                 selectedDay = getDayAWeekAgo();
@@ -277,8 +301,12 @@ public class PeakTimePage extends AppCompatActivity {
 
     private String getDayAWeekAgo() {
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+
+        // Subtract 7 days and add dateModifier
         calendar.add(Calendar.DATE, -7 + dateModifier);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Log.d(TAG, dateFormat.format(calendar.getTime()));
         return dateFormat.format(calendar.getTime());
     }
 
@@ -380,9 +408,10 @@ public class PeakTimePage extends AppCompatActivity {
         YAxis leftAxis = peakTimeChart.getAxisLeft();
 
 
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setDrawAxisLine(false);
-        leftAxis.setDrawLabels(false);
+        leftAxis.setDrawGridLines(true);
+        leftAxis.setDrawAxisLine(true);
+        leftAxis.setDrawLabels(true);
+
 
         YAxis rightAxis = peakTimeChart.getAxisRight();
         rightAxis.setValueFormatter(new ValueFormatter() {
