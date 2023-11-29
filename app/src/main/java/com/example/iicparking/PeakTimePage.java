@@ -80,8 +80,9 @@ public class PeakTimePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peak_time_page);
-        setReference();
         getToday();
+        setReference();
+
         updateDay(0);
 //        putDummyDataIntoFirestore();
 
@@ -124,7 +125,7 @@ public class PeakTimePage extends AppCompatActivity {
         );
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -6);
+        calendar.add(Calendar.DATE, -5);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
         String date = dateFormat.format(calendar.getTime());
@@ -149,33 +150,35 @@ public class PeakTimePage extends AppCompatActivity {
         afterDay = findViewById(R.id.afterDay);
         DAYS = getResources().getStringArray(R.array.days_of_week);
         peakTimeChart = findViewById(R.id.peakTimeChart);
-        selectedDay = getDayAWeekAgo();
+
         db = FirebaseFirestore.getInstance();
         // Set the initial value of dateModifier based on the current day
 
         switch (currentDay) {
-            case Calendar.SUNDAY:
+            case 0:
                 dateModifier = 0;
                 break;
-            case Calendar.MONDAY:
+            case 1:
                 dateModifier = 1;
                 break;
-            case Calendar.TUESDAY:
+            case 2:
                 dateModifier = 2;
                 break;
-            case Calendar.WEDNESDAY:
+            case 3:
                 dateModifier = 3;
                 break;
-            case Calendar.THURSDAY:
+            case 4:
                 dateModifier = 4;
                 break;
-            case Calendar.FRIDAY:
+            case 5:
                 dateModifier = 5;
                 break;
-            case Calendar.SATURDAY:
+            case 6:
                 dateModifier = 6;
                 break;
         }
+
+        selectedDay = getDayAWeekAgo();
 
 
         //indicator 1 mean prior day is clicked, while 2 indicate after day is clicked
@@ -302,11 +305,12 @@ public class PeakTimePage extends AppCompatActivity {
     private String getDayAWeekAgo() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        Log.d(TAG, "Date Modifier: " + dateModifier);
 
         // Subtract 7 days and add dateModifier
         calendar.add(Calendar.DATE, -7 + dateModifier);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        Log.d(TAG, dateFormat.format(calendar.getTime()));
+        Log.d(TAG, "Day a week ago: " + dateFormat.format(calendar.getTime()));
         return dateFormat.format(calendar.getTime());
     }
 
@@ -314,6 +318,7 @@ public class PeakTimePage extends AppCompatActivity {
     private void getToday(){
         Calendar calendar = Calendar.getInstance();
         currentDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        Log.d(TAG, "Today: " + currentDay);
 
     }
 
@@ -321,7 +326,7 @@ public class PeakTimePage extends AppCompatActivity {
         // Get the date of the selected day
 
 
-        Log.d("SelectedDate", selectedDay);
+        Log.d("SelectedDate", "Selected Day: " + selectedDay);
 
         // Fetch data from Firestore
         db.collection("parkLog")
@@ -355,7 +360,7 @@ public class PeakTimePage extends AppCompatActivity {
                     List<BarEntry> values = new ArrayList<>();
                     for (Map.Entry<Integer, Integer> entry : hourCarCountMap.entrySet()) {
                         values.add(new BarEntry(23 - entry.getKey(), entry.getValue()));
-                        Log.d(TAG,entry.getKey().toString() + entry.getValue().toString() );
+//                        Log.d(TAG,entry.getKey().toString() + entry.getValue().toString() );
                     }
 
 
